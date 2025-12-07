@@ -1,0 +1,132 @@
+/* Void UI CSS Variables */
+:root {
+  /* Dark theme (default) */
+  --void-bg: #0a0a0a;
+  --void-surface: #111111;
+  --void-text: #fafafa;
+  --void-muted: #737373;
+  --void-border: #262626;
+  --void-border-hover: #404040;
+  --void-accent: #ff2a00;
+  --void-accent-hover: #ff4d26;
+  --void-accent-alt: #ff6b00;
+}
+
+/* Light theme */
+[data-theme='light'] {
+  --void-bg: #fafafa;
+  --void-surface: #ffffff;
+  --void-text: #0a0a0a;
+  --void-muted: #737373;
+  --void-border: #e5e5e5;
+  --void-border-hover: #d4d4d4;
+  --void-accent: #ff2a00;
+  --void-accent-hover: #e62600;
+  --void-accent-alt: #ff6b00;
+}
+
+/* Animations */
+@keyframes void-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes void-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes void-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes void-slide-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes void-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes void-scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes void-accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--accordion-content-height);
+  }
+}
+
+@keyframes void-accordion-up {
+  from {
+    height: var(--accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* Animation utilities */
+.void-animate-fade-in {
+  animation: void-fade-in 0.2s ease-out;
+}
+
+.void-animate-fade-out {
+  animation: void-fade-out 0.2s ease-out;
+}
+
+.void-animate-slide-in {
+  animation: void-slide-in 0.2s ease-out;
+}
+
+.void-animate-slide-out {
+  animation: void-slide-out 0.2s ease-out;
+}
+
+.void-animate-scale-in {
+  animation: void-scale-in 0.2s ease-out;
+}
+
+.void-animate-scale-out {
+  animation: void-scale-out 0.2s ease-out;
+}
