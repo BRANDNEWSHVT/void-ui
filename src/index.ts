@@ -137,7 +137,8 @@ export {
 } from './alert-dialog'
 
 // Alert
-export { Alert, AlertTitle, AlertDescription, alertVariants } from './alert'
+export { Alert, AlertTitle, AlertDescription, AlertClose, alertVariants } from './alert'
+export type { AlertProps, AlertCloseProps } from './alert'
 
 // Avatar
 export {
@@ -148,6 +149,7 @@ export {
   avatarVariants,
   avatarIndicatorVariants,
 } from './avatar'
+export type { AvatarProps } from './avatar'
 
 // Badge
 export { Badge, badgeVariants } from './badge'

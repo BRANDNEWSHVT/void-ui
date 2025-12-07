@@ -4,6 +4,7 @@ import {
   CheckCircle,
   Warning,
   XCircle,
+  X,
   type IconProps,
 } from '@phosphor-icons/react';
 import { cn } from './utils';
@@ -99,7 +100,10 @@ export function AlertTitle({
   return (
     <h5
       data-slot="alert-title"
-      className={cn('font-semibold leading-none tracking-tight', className)}
+      className={cn(
+        'font-semibold leading-none tracking-tight mb-2',
+        className
+      )}
       {...props}
     />
   );
@@ -118,5 +122,31 @@ export function AlertDescription({
       )}
       {...props}
     />
+  );
+}
+
+export interface AlertCloseProps extends React.ComponentProps<'button'> {
+  onClose?: () => void;
+}
+
+export function AlertClose({ className, onClose, ...props }: AlertCloseProps) {
+  return (
+    <button
+      type="button"
+      data-slot="alert-close"
+      onClick={onClose}
+      className={cn(
+        'absolute right-2 top-2 rounded-md p-1',
+        'text-(--void-muted) opacity-70',
+        'transition-opacity duration-200',
+        'hover:opacity-100',
+        'focus:outline-none focus:ring-2 focus:ring-(--void-primary)',
+        className
+      )}
+      {...props}
+    >
+      <X size={16} weight="bold" />
+      <span className="sr-only">Close</span>
+    </button>
   );
 }

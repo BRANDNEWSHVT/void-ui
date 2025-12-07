@@ -3,13 +3,15 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from './utils';
 
 export const avatarVariants = cva(
-  'relative rounded-full select-none bg-(--void-bg-muted) flex items-center justify-center text-(--void-text) font-semibold',
+  'relative inline-flex shrink-0 overflow-hidden rounded-full select-none',
   {
     variants: {
       size: {
+        xs: 'size-6 text-[10px]',
         sm: 'size-8 text-xs',
         md: 'size-10 text-sm',
         lg: 'size-12 text-base',
+        xl: 'size-14 text-lg',
       },
     },
     defaultVariants: {
@@ -18,18 +20,56 @@ export const avatarVariants = cva(
   }
 );
 
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) {
+    return parts[0].slice(0, 2).toUpperCase();
+  }
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+export interface AvatarProps
+  extends Omit<React.ComponentProps<typeof BaseAvatar.Root>, 'children'>,
+    VariantProps<typeof avatarVariants> {
+  src?: string;
+  alt?: string;
+  fallback?: string;
+  name?: string;
+}
+
 export function Avatar({
   size,
   className,
+  src,
+  alt,
+  fallback,
+  name,
   ...props
-}: React.ComponentProps<typeof BaseAvatar.Root> &
-  VariantProps<typeof avatarVariants>) {
+}: AvatarProps) {
+  const initials = fallback || (name ? getInitials(name) : '?');
+
   return (
     <BaseAvatar.Root
       data-slot="avatar"
       className={cn(avatarVariants({ size, className }))}
       {...props}
-    />
+    >
+      {src && (
+        <BaseAvatar.Image
+          src={src}
+          alt={alt || name || 'Avatar'}
+          className="size-full rounded-full object-cover"
+        />
+      )}
+      <BaseAvatar.Fallback
+        className={cn(
+          'flex size-full items-center justify-center rounded-full',
+          'bg-(--void-bg-muted) text-(--void-text) font-medium'
+        )}
+      >
+        {initials}
+      </BaseAvatar.Fallback>
+    </BaseAvatar.Root>
   );
 }
 
@@ -54,7 +94,8 @@ export function AvatarFallback({
     <BaseAvatar.Fallback
       data-slot="avatar-fallback"
       className={cn(
-        'flex items-center justify-center size-full rounded-full',
+        'flex size-full items-center justify-center rounded-full',
+        'bg-(--void-bg-muted) text-(--void-text) font-medium',
         className
       )}
       {...props}

@@ -1,4 +1,5 @@
 import { Accordion as BaseAccordion } from '@base-ui-components/react/accordion';
+import { CaretDown } from '@phosphor-icons/react';
 import { cn } from './utils';
 
 export function Accordion({
@@ -22,7 +23,9 @@ export function AccordionItem({
     <BaseAccordion.Item
       data-slot="accordion-item"
       className={cn(
-        'rounded-xl border border-(--void-border) bg-(--void-bg-subtle)',
+        'rounded-lg border border-(--void-border) bg-(--void-surface)',
+        'transition-colors duration-200',
+        'data-disabled:opacity-50 data-disabled:pointer-events-none',
         className
       )}
       {...props}
@@ -40,30 +43,23 @@ export function AccordionTrigger({
       <BaseAccordion.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          'flex w-full items-center justify-between px-4 py-3',
-          'font-mono text-sm text-(--void-text) transition-colors',
-          'hover:bg-(--void-bg-subtle) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--void-primary)',
+          'flex w-full items-center justify-between rounded-lg px-4 py-3',
+          'text-sm font-medium text-(--void-text)',
+          'transition-all duration-200',
+          'hover:bg-(--void-bg-muted)',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--void-primary)',
           'data-panel-open:text-(--void-primary)',
+          'disabled:pointer-events-none disabled:opacity-50',
           className
         )}
         {...props}
       >
         {children}
-        <svg
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-          fill="none"
-          className="text-(--void-muted) transition-transform data-panel-open:rotate-180"
-        >
-          <path
-            d="M3 4.5L6 7.5L9 4.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <CaretDown
+          size={14}
+          weight="bold"
+          className="shrink-0 text-(--void-muted) transition-transform duration-200 data-panel-open:rotate-180"
+        />
       </BaseAccordion.Trigger>
     </BaseAccordion.Header>
   );
@@ -71,20 +67,20 @@ export function AccordionTrigger({
 
 export function AccordionContent({
   className,
+  children,
   ...props
 }: React.ComponentProps<typeof BaseAccordion.Panel>) {
   return (
     <BaseAccordion.Panel
       data-slot="accordion-content"
       className={cn(
-        'overflow-hidden transition-[height] data-ending-style:h-0 data-starting-style:h-0',
+        'overflow-hidden transition-[height] duration-200',
+        'data-ending-style:h-0 data-starting-style:h-0',
         className
       )}
       {...props}
     >
-      <div className="px-4 pb-4 font-mono text-sm text-(--void-muted)">
-        {props.children}
-      </div>
+      <div className="px-4 pb-4 text-sm text-(--void-muted)">{children}</div>
     </BaseAccordion.Panel>
   );
 }
