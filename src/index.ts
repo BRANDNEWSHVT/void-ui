@@ -148,6 +148,7 @@ export {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardContent,
   CardBody,
   CardFooter,
   cardVariants,
