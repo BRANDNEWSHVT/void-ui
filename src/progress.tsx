@@ -66,7 +66,7 @@ export function Progress({
       </BaseProgress.Track>
       {showValue && (
         <span className="mt-1.5 block text-right text-xs text-(--void-muted)">
-          {Math.round(value) || 0}%
+          {Math.round(value!)}%
         </span>
       )}
     </BaseProgress.Root>
