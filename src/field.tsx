@@ -8,25 +8,32 @@ export function Field({
   return (
     <BaseField.Root
       data-slot="field"
-      className={cn('flex flex-col gap-2', className)}
+      className={cn('flex flex-col gap-1.5', className)}
       {...props}
     />
   );
 }
 
+export interface FieldLabelProps
+  extends React.ComponentProps<typeof BaseField.Label> {
+  required?: boolean;
+}
+
 export function FieldLabel({
   className,
+  required,
+  children,
   ...props
-}: React.ComponentProps<typeof BaseField.Label>) {
+}: FieldLabelProps) {
   return (
     <BaseField.Label
       data-slot="field-label"
-      className={cn(
-        'font-mono text-xs uppercase tracking-wider text-(--void-muted)',
-        className
-      )}
+      className={cn('text-sm font-medium text-(--void-text)', className)}
       {...props}
-    />
+    >
+      {children}
+      {required && <span className="text-(--void-danger) ml-0.5">*</span>}
+    </BaseField.Label>
   );
 }
 
@@ -37,7 +44,7 @@ export function FieldDescription({
   return (
     <BaseField.Description
       data-slot="field-description"
-      className={cn('text-(--void-muted) text-sm', className)}
+      className={cn('text-sm text-(--void-muted)', className)}
       {...props}
     />
   );
@@ -50,7 +57,7 @@ export function FieldError({
   return (
     <BaseField.Error
       data-slot="field-error"
-      className={cn('text-(--void-danger) text-sm', className)}
+      className={cn('text-sm text-(--void-danger)', className)}
       {...props}
     />
   );

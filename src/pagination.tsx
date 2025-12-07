@@ -1,3 +1,4 @@
+import { CaretLeft, CaretRight, DotsThree } from '@phosphor-icons/react';
 import { cn } from './utils';
 import { buttonVariants } from './button';
 
@@ -28,9 +29,8 @@ export function PaginationList({
   );
 }
 
-export interface PaginationItemProps extends React.ComponentProps<'a'> {
+export interface PaginationItemProps extends React.ComponentProps<'button'> {
   active?: boolean;
-  disabled?: boolean;
 }
 
 export function PaginationItem({
@@ -41,18 +41,17 @@ export function PaginationItem({
 }: PaginationItemProps) {
   return (
     <li>
-      <a
+      <button
+        type="button"
         data-slot="pagination-item"
         aria-current={active ? 'page' : undefined}
-        aria-disabled={disabled ? true : undefined}
+        disabled={disabled}
         className={cn(
           buttonVariants({
             variant: active ? 'primary' : 'ghost',
             size: 'icon',
           }),
-          'cursor-pointer',
           active && 'pointer-events-none',
-          disabled && 'pointer-events-none opacity-50',
           className
         )}
         {...props}
@@ -61,70 +60,65 @@ export function PaginationItem({
   );
 }
 
+export interface PaginationPreviousProps
+  extends React.ComponentProps<'button'> {
+  iconOnly?: boolean;
+}
+
 export function PaginationPrevious({
   className,
+  iconOnly,
+  disabled,
   ...props
-}: React.ComponentProps<'a'>) {
+}: PaginationPreviousProps) {
   return (
     <li>
-      <a
+      <button
+        type="button"
         data-slot="pagination-previous"
         aria-label="Go to previous page"
+        disabled={disabled}
         className={cn(
-          buttonVariants({ variant: 'ghost', size: 'sm' }),
-          'cursor-pointer gap-1',
+          buttonVariants({ variant: 'ghost', size: iconOnly ? 'icon' : 'sm' }),
+          'gap-1',
           className
         )}
         {...props}
       >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="m15 18-6-6 6-6" />
-        </svg>
-        Previous
-      </a>
+        <CaretLeft size={16} />
+        {!iconOnly && <span>Previous</span>}
+      </button>
     </li>
   );
 }
 
+export interface PaginationNextProps extends React.ComponentProps<'button'> {
+  iconOnly?: boolean;
+}
+
 export function PaginationNext({
   className,
+  iconOnly,
+  disabled,
   ...props
-}: React.ComponentProps<'a'>) {
+}: PaginationNextProps) {
   return (
     <li>
-      <a
+      <button
+        type="button"
         data-slot="pagination-next"
         aria-label="Go to next page"
+        disabled={disabled}
         className={cn(
-          buttonVariants({ variant: 'ghost', size: 'sm' }),
-          'cursor-pointer gap-1',
+          buttonVariants({ variant: 'ghost', size: iconOnly ? 'icon' : 'sm' }),
+          'gap-1',
           className
         )}
         {...props}
       >
-        Next
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </a>
+        {!iconOnly && <span>Next</span>}
+        <CaretRight size={16} />
+      </button>
     </li>
   );
 }
@@ -137,13 +131,14 @@ export function PaginationEllipsis({
     <li>
       <span
         data-slot="pagination-ellipsis"
+        aria-hidden
         className={cn(
-          'flex h-10 w-10 items-center justify-center text-(--void-muted)',
+          'flex size-9 items-center justify-center text-(--void-muted)',
           className
         )}
         {...props}
       >
-        ...
+        <DotsThree size={20} weight="bold" />
       </span>
     </li>
   );

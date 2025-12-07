@@ -1,6 +1,6 @@
 {
   "name": "@radenadri/void-ui",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A React component library built on Base UI and Tailwind CSS",
   "author": "Adrian",
   "license": "MIT",

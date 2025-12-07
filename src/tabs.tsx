@@ -8,7 +8,7 @@ export function Tabs({
   return (
     <BaseTabs.Root
       data-slot="tabs"
-      className={cn('flex flex-col gap-4', className)}
+      className={cn('flex flex-col gap-3', className)}
       {...props}
     />
   );
@@ -22,8 +22,8 @@ export function TabsList({
     <BaseTabs.List
       data-slot="tabs-list"
       className={cn(
-        'inline-flex h-10 items-center justify-center gap-1 rounded-lg p-1',
-        'bg-(--void-bg-muted) border border-(--void-border)',
+        'inline-flex h-10 items-center gap-1 rounded-lg p-1',
+        'bg-(--void-bg-muted)',
         className
       )}
       {...props}
@@ -41,11 +41,12 @@ export function TabsTrigger({
       className={cn(
         'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5',
         'text-sm font-medium text-(--void-muted)',
-        'transition-all duration-200',
-        'hover:text-(--void-text)',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary) focus-visible:ring-offset-2',
+        'transition-all duration-150',
+        'hover:text-(--void-text) hover:bg-(--void-bg-subtle)',
+        'active:scale-[0.98]',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary)/30',
         'disabled:pointer-events-none disabled:opacity-50',
-        'data-selected:bg-(--void-surface) data-selected:text-(--void-text) data-selected:shadow-[var(--void-shadow-sm)]',
+        'data-selected:bg-(--void-surface) data-selected:text-(--void-text) data-selected:shadow-sm',
         className
       )}
       {...props}
@@ -60,21 +61,9 @@ export function TabsContent({
   return (
     <BaseTabs.Panel
       data-slot="tabs-content"
-      className={cn('outline-none', className)}
-      {...props}
-    />
-  );
-}
-
-export function TabsIndicator({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseTabs.Indicator>) {
-  return (
-    <BaseTabs.Indicator
-      data-slot="tabs-indicator"
       className={cn(
-        'absolute h-full rounded-full bg-(--void-primary) transition-all',
+        'text-(--void-text) outline-none',
+        'focus-visible:outline-none',
         className
       )}
       {...props}

@@ -13,28 +13,28 @@ export function DialogTrigger({
   return (
     <BaseDialog.Trigger
       data-slot="dialog-trigger"
-      className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2',
-        'bg-(--void-primary) text-(--void-primary-foreground) font-medium text-sm',
-        'shadow-[var(--void-shadow-md)] transition-all duration-200',
-        'hover:bg-(--void-primary-hover) hover:shadow-[var(--void-glow-primary)]',
-        className
-      )}
+      className={cn('cursor-pointer', className)}
       {...props}
     />
   );
 }
 
+export interface DialogContentProps
+  extends React.ComponentProps<typeof BaseDialog.Popup> {
+  showClose?: boolean;
+}
+
 export function DialogContent({
   className,
   children,
+  showClose = true,
   ...props
-}: React.ComponentProps<typeof BaseDialog.Popup>) {
+}: DialogContentProps) {
   return (
     <BaseDialog.Portal>
       <BaseDialog.Backdrop
         className={cn(
-          'fixed inset-0 bg-black/50 backdrop-blur-sm',
+          'fixed inset-0 bg-black/60 backdrop-blur-sm',
           'transition-opacity duration-200',
           'data-ending-style:opacity-0 data-starting-style:opacity-0'
         )}
@@ -43,9 +43,9 @@ export function DialogContent({
         data-slot="dialog-content"
         className={cn(
           'fixed left-1/2 top-1/2 w-full max-w-lg -translate-x-1/2 -translate-y-1/2',
-          'rounded-xl bg-[var(--void-surface)] p-6',
-          'border border-[var(--void-glass-border)]',
-          'shadow-[var(--void-shadow-xl)]',
+          'rounded-xl bg-(--void-surface) p-6',
+          'border border-(--void-border)',
+          'shadow-(--void-shadow-xl)',
           'transition-all duration-200',
           'data-ending-style:scale-95 data-ending-style:opacity-0',
           'data-starting-style:scale-95 data-starting-style:opacity-0',
@@ -54,7 +54,7 @@ export function DialogContent({
         {...props}
       >
         {children}
-        <DialogClose className="absolute right-4 top-4" />
+        {showClose && <DialogClose />}
       </BaseDialog.Popup>
     </BaseDialog.Portal>
   );

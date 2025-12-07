@@ -1,14 +1,22 @@
 import { Menu as BaseMenu } from '@base-ui-components/react/menu';
+import { Check, Circle } from '@phosphor-icons/react';
 import { cn } from './utils';
 
 export function Dropdown(props: React.ComponentProps<typeof BaseMenu.Root>) {
   return <BaseMenu.Root data-slot="dropdown" {...props} />;
 }
 
-export function DropdownTrigger(
-  props: React.ComponentProps<typeof BaseMenu.Trigger>
-) {
-  return <BaseMenu.Trigger data-slot="dropdown-trigger" {...props} />;
+export function DropdownTrigger({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseMenu.Trigger>) {
+  return (
+    <BaseMenu.Trigger
+      data-slot="dropdown-trigger"
+      className={cn('cursor-pointer', className)}
+      {...props}
+    />
+  );
 }
 
 export function DropdownContent({
@@ -19,14 +27,16 @@ export function DropdownContent({
   return (
     <BaseMenu.Portal>
       <BaseMenu.Backdrop className="fixed inset-0" />
-      <BaseMenu.Positioner sideOffset={6} {...props}>
+      <BaseMenu.Positioner sideOffset={8} {...props}>
         <BaseMenu.Popup
           data-slot="dropdown-content"
           className={cn(
-            'origin-(--transform-origin) bg-(--void-surface) border border-(--void-border) rounded-xl',
-            'p-1 min-w-40 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl',
-            'transition-[transform,opacity] data-ending-style:opacity-0 data-ending-style:scale-90',
-            'data-starting-style:opacity-0 data-starting-style:scale-90',
+            'origin-(--transform-origin) min-w-44 p-1.5',
+            'bg-(--void-surface) border border-(--void-border) rounded-lg',
+            'shadow-(--void-shadow-lg)',
+            'transition-all duration-150',
+            'data-ending-style:opacity-0 data-ending-style:scale-95',
+            'data-starting-style:opacity-0 data-starting-style:scale-95',
             className
           )}
         >
@@ -38,10 +48,11 @@ export function DropdownContent({
 }
 
 const dropdownItemClasses = [
-  'flex items-center gap-3 py-2 px-3 rounded-lg cursor-pointer select-none',
-  'font-mono text-sm text-(--void-text) outline-none transition-colors',
-  'data-highlighted:bg-(--void-bg-muted) data-highlighted:text-(--void-primary)',
-  '*:[svg]:size-4 *:[svg]:text-(--void-muted)',
+  'flex items-center gap-2.5 py-2 px-2.5 rounded-md cursor-pointer select-none',
+  'text-sm text-(--void-text) outline-none transition-colors',
+  'data-highlighted:bg-(--void-bg-muted)',
+  'data-disabled:opacity-50 data-disabled:cursor-not-allowed',
+  '*:[svg]:size-4 *:[svg]:text-(--void-muted) *:[svg]:shrink-0',
 ];
 
 export function DropdownItem({
@@ -64,7 +75,7 @@ export function DropdownSeparator({
   return (
     <BaseMenu.Separator
       data-slot="dropdown-separator"
-      className={cn('h-px my-1 bg-(--void-border)', className)}
+      className={cn('h-px my-1.5 -mx-1.5 bg-(--void-border)', className)}
       {...props}
     />
   );
@@ -84,7 +95,7 @@ export function DropdownGroupLabel({
     <BaseMenu.GroupLabel
       data-slot="dropdown-group-label"
       className={cn(
-        'px-3 py-1.5 text-(--void-muted) font-mono text-xs uppercase tracking-wider',
+        'px-2.5 py-1.5 text-(--void-muted) text-xs font-medium',
         className
       )}
       {...props}
@@ -100,23 +111,11 @@ export function DropdownCheckboxItem({
   return (
     <BaseMenu.CheckboxItem
       data-slot="dropdown-checkbox-item"
-      className={cn(dropdownItemClasses, 'pl-8 data-checked:pl-3', className)}
+      className={cn(dropdownItemClasses, 'pl-7', className)}
       {...props}
     >
-      <BaseMenu.CheckboxItemIndicator className="w-4">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="text-(--void-primary)"
-        >
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
+      <BaseMenu.CheckboxItemIndicator className="absolute left-2.5">
+        <Check size={14} weight="bold" className="text-(--void-primary)" />
       </BaseMenu.CheckboxItemIndicator>
       {children}
     </BaseMenu.CheckboxItem>
@@ -137,19 +136,11 @@ export function DropdownRadioItem({
   return (
     <BaseMenu.RadioItem
       data-slot="dropdown-radio-item"
-      className={cn(dropdownItemClasses, 'pl-8 data-checked:pl-3', className)}
+      className={cn(dropdownItemClasses, 'pl-7', className)}
       {...props}
     >
-      <BaseMenu.RadioItemIndicator className="w-4">
-        <svg
-          width="8"
-          height="8"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="text-(--void-primary)"
-        >
-          <circle cx="12" cy="12" r="10" />
-        </svg>
+      <BaseMenu.RadioItemIndicator className="absolute left-2.5">
+        <Circle size={8} weight="fill" className="text-(--void-primary)" />
       </BaseMenu.RadioItemIndicator>
       {children}
     </BaseMenu.RadioItem>

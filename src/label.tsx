@@ -1,14 +1,18 @@
 import { cn } from './utils';
 
-export function Label({ className, ...props }: React.ComponentProps<'label'>) {
+export interface LabelProps extends React.ComponentProps<'label'> {
+  required?: boolean;
+}
+
+export function Label({ className, required, children, ...props }: LabelProps) {
   return (
     <label
       data-slot="label"
-      className={cn(
-        'font-mono text-xs uppercase tracking-wider text-(--void-muted) flex items-center gap-2',
-        className
-      )}
+      className={cn('text-sm font-medium text-(--void-text)', className)}
       {...props}
-    />
+    >
+      {children}
+      {required && <span className="text-(--void-danger) ml-0.5">*</span>}
+    </label>
   );
 }

@@ -14,78 +14,75 @@ export function Menu(props: React.ComponentProps<typeof BaseMenu.Root>) {
 
 export function MenuTrigger({
   className,
-  children,
   ...props
 }: React.ComponentProps<typeof BaseMenu.Trigger>) {
   return (
     <BaseMenu.Trigger
       data-slot="menu-trigger"
-      className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-full border border-(--void-border) bg-(--void-bg-subtle) px-4 py-2',
-        'font-mono text-sm text-(--void-text) transition-colors',
-        'hover:border-(--void-border-hover) hover:bg-(--void-bg-muted) data-[popup-open]:border-(--void-primary)',
-        className
-      )}
+      className={cn(className)}
       {...props}
-    >
-      {children}
-      <svg
-        width="12"
-        height="12"
-        viewBox="0 0 12 12"
-        fill="none"
-        className="text-(--void-muted)"
-      >
-        <path
-          d="M3 4.5L6 7.5L9 4.5"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </BaseMenu.Trigger>
+    />
   );
 }
 
 export function MenuContent({
   className,
+  children,
   ...props
-}: React.ComponentProps<typeof BaseMenu.Popup>) {
+}: React.ComponentProps<typeof BaseMenu.Positioner>) {
   return (
     <BaseMenu.Portal>
-      <BaseMenu.Positioner sideOffset={8}>
+      <BaseMenu.Backdrop className="fixed inset-0" />
+      <BaseMenu.Positioner sideOffset={8} {...props}>
         <BaseMenu.Popup
           data-slot="menu-content"
           className={cn(
-            'min-w-[180px] origin-[var(--transform-origin)] rounded-xl border border-(--void-border) bg-(--void-surface) p-1',
-            'shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl',
-            'transition-[transform,opacity] data-[ending-style]:scale-95 data-[ending-style]:opacity-0',
-            'data-[starting-style]:scale-95 data-[starting-style]:opacity-0',
+            'origin-(--transform-origin) min-w-44 p-1.5',
+            'bg-(--void-surface) border border-(--void-border) rounded-lg',
+            'shadow-(--void-shadow-lg)',
+            'transition-all duration-150',
+            'data-starting-style:scale-95 data-starting-style:opacity-0',
+            'data-ending-style:scale-95 data-ending-style:opacity-0',
             className
           )}
-          {...props}
-        />
+        >
+          {children}
+        </BaseMenu.Popup>
       </BaseMenu.Positioner>
     </BaseMenu.Portal>
   );
 }
 
+export interface MenuItemProps
+  extends React.ComponentProps<typeof BaseMenu.Item> {
+  shortcut?: string;
+}
+
 export function MenuItem({
   className,
+  children,
+  shortcut,
   ...props
-}: React.ComponentProps<typeof BaseMenu.Item>) {
+}: MenuItemProps) {
   return (
     <BaseMenu.Item
       data-slot="menu-item"
       className={cn(
-        'flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2',
-        'font-mono text-sm text-(--void-text) outline-none transition-colors',
-        'data-[highlighted]:bg-(--void-bg-muted) data-[highlighted]:text-(--void-primary)',
+        'flex cursor-pointer select-none items-center gap-2 rounded-md px-2.5 py-1.5',
+        'text-sm text-(--void-text) outline-none',
+        'transition-colors duration-100',
+        'data-highlighted:bg-(--void-bg-muted)',
+        'data-disabled:pointer-events-none data-disabled:opacity-50',
+        '[&>svg]:size-4 [&>svg]:shrink-0',
         className
       )}
       {...props}
-    />
+    >
+      {children}
+      {shortcut && (
+        <span className="text-xs text-(--void-muted) ml-auto">{shortcut}</span>
+      )}
+    </BaseMenu.Item>
   );
 }
 
@@ -96,7 +93,7 @@ export function MenuSeparator({
   return (
     <BaseMenu.Separator
       data-slot="menu-separator"
-      className={cn('my-1 h-px bg-(--void-border)', className)}
+      className={cn('my-1.5 h-px bg-(--void-border)', className)}
       {...props}
     />
   );
@@ -114,7 +111,7 @@ export function MenuGroupLabel({
     <BaseMenu.GroupLabel
       data-slot="menu-group-label"
       className={cn(
-        'px-3 py-1.5 font-mono text-xs text-(--void-muted)',
+        'px-2.5 py-1.5 text-xs font-medium text-(--void-muted)',
         className
       )}
       {...props}

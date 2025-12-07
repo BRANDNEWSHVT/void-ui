@@ -9,7 +9,7 @@ export { Button, buttonVariants } from './button'
 export type { ButtonProps } from './button'
 
 // Input
-export { Input, Field } from './input'
+export { Input } from './input'
 export type { InputProps } from './input'
 
 // Checkbox
@@ -23,17 +23,14 @@ export type { SwitchProps } from './switch'
 // Select
 export {
   Select,
-  SelectRoot,
-  SelectValue,
-  SelectIcon,
-  SelectPortal,
-  SelectPositioner,
-  SelectPopup,
+  SelectTrigger,
+  SelectContent,
   SelectItem,
-  SelectItemText,
-  SelectItemIndicator,
+  SelectGroup,
+  SelectGroupLabel,
+  SelectSeparator,
 } from './select'
-export type { SelectOption, SelectProps } from './select'
+export type { SelectOption, SelectTriggerProps } from './select'
 
 // Dialog
 export {
@@ -46,6 +43,7 @@ export {
   DialogFooter,
   DialogClose,
 } from './dialog'
+export type { DialogContentProps } from './dialog'
 
 // Popover
 export {
@@ -53,7 +51,10 @@ export {
   PopoverTrigger,
   PopoverContent,
   PopoverClose,
+  PopoverTitle,
+  PopoverDescription,
 } from './popover'
+export type { PopoverContentProps } from './popover'
 
 // Tooltip
 export {
@@ -73,7 +74,7 @@ export {
   MenuGroup,
   MenuGroupLabel,
 } from './menu'
-export type { MenuItem as MenuItemType } from './menu'
+export type { MenuItem as MenuItemType, MenuItemProps } from './menu'
 
 // Tabs
 export {
@@ -81,7 +82,6 @@ export {
   TabsList,
   TabsTrigger,
   TabsContent,
-  TabsIndicator,
 } from './tabs'
 
 // Accordion
@@ -105,23 +105,11 @@ export {
 export type { ToastRootProps } from './toast'
 
 // Progress
-export {
-  Progress,
-  ProgressRoot,
-  ProgressTrack,
-  ProgressIndicator,
-} from './progress'
+export { Progress, ProgressLabel, progressVariants } from './progress'
 export type { ProgressProps } from './progress'
 
 // Slider
-export {
-  Slider,
-  SliderRoot,
-  SliderControl,
-  SliderTrack,
-  SliderIndicator,
-  SliderThumb,
-} from './slider'
+export { Slider, SliderLabel } from './slider'
 export type { SliderProps } from './slider'
 
 // Alert Dialog
@@ -167,9 +155,11 @@ export {
 
 // Chip
 export { Chip, ChipButton, chipVariants } from './chip'
+export type { ChipProps } from './chip'
 
 // Collapsible
 export { Collapsible, CollapsibleTrigger, CollapsibleContent } from './collapsible'
+export type { CollapsibleTriggerProps } from './collapsible'
 
 // Divider
 export { Divider, dividerVariants } from './divider'
@@ -196,9 +186,10 @@ export {
   FieldError,
   FieldValidity,
 } from './field'
+export type { FieldLabelProps } from './field'
 
 // Fieldset
-export { Fieldset, FieldsetLegend } from './fieldset'
+export { Fieldset, FieldsetLegend, FieldsetDescription } from './fieldset'
 
 // Heading
 export { Heading, headingVariants } from './heading'
@@ -220,9 +211,11 @@ export {
 
 // Kbd
 export { Kbd, KbdGroup, kbdVariants } from './kbd'
+export type { KbdProps } from './kbd'
 
 // Label
 export { Label } from './label'
+export type { LabelProps } from './label'
 
 // Pagination
 export {
@@ -233,21 +226,27 @@ export {
   PaginationNext,
   PaginationEllipsis,
 } from './pagination'
-export type { PaginationItemProps } from './pagination'
+export type {
+  PaginationItemProps,
+  PaginationPreviousProps,
+  PaginationNextProps,
+} from './pagination'
 
 // Radio
 export { Radio, RadioGroup, RadioItem } from './radio'
 export type { RadioItemProps } from './radio'
 
 // Separator
-export { Separator, separatorVariants } from './separator'
+export { Separator } from './separator'
+export type { SeparatorProps } from './separator'
 
 // Spinner
-export { Spinner } from './spinner'
+export { Spinner, spinnerVariants } from './spinner'
 export type { SpinnerProps } from './spinner'
 
 // Stack
 export { Stack, stackVariants } from './stack'
+export type { StackProps } from './stack'
 
 // Table
 export {

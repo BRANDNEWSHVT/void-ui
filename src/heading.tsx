@@ -1,43 +1,64 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from './utils';
 
-export const headingVariants = cva('font-semibold text-(--void-text)', {
-  variants: {
-    size: {
-      sm: 'text-lg',
-      md: 'text-2xl',
-      lg: 'text-3xl',
-      xl: 'text-4xl',
+export const headingVariants = cva(
+  'font-semibold text-(--void-text) tracking-tight',
+  {
+    variants: {
+      size: {
+        xs: 'text-sm',
+        sm: 'text-base',
+        md: 'text-lg',
+        lg: 'text-2xl',
+        xl: 'text-3xl',
+        '2xl': 'text-4xl',
+        '3xl': 'text-5xl',
+      },
+      weight: {
+        normal: 'font-normal',
+        medium: 'font-medium',
+        semibold: 'font-semibold',
+        bold: 'font-bold',
+      },
     },
-  },
-  defaultVariants: {
-    size: 'lg',
-  },
-});
+    defaultVariants: {
+      size: 'lg',
+      weight: 'semibold',
+    },
+  }
+);
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface HeadingProps
-  extends React.ComponentProps<'h1'>,
+  extends Omit<React.ComponentProps<'h1'>, 'ref'>,
     VariantProps<typeof headingVariants> {
-  level?: HeadingLevel;
+  as?: `h${HeadingLevel}`;
 }
 
-export function Heading({ level, size, className, ...props }: HeadingProps) {
-  const levelMap: Record<NonNullable<typeof size>, HeadingLevel> = {
+export function Heading({
+  as,
+  size,
+  weight,
+  className,
+  ...props
+}: HeadingProps) {
+  const sizeToLevel: Record<NonNullable<typeof size>, HeadingLevel> = {
+    '3xl': 1,
+    '2xl': 1,
     xl: 1,
-    lg: 1,
-    md: 2,
-    sm: 3,
+    lg: 2,
+    md: 3,
+    sm: 4,
+    xs: 5,
   };
 
-  const selectedLevel = level ?? levelMap[size ?? 'lg'];
-  const Tag = `h${selectedLevel}` as const;
+  const Tag = as ?? `h${sizeToLevel[size ?? 'lg']}`;
 
   return (
     <Tag
       data-slot="heading"
-      className={cn(headingVariants({ size, className }))}
+      className={cn(headingVariants({ size, weight, className }))}
       {...props}
     />
   );

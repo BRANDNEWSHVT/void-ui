@@ -9,7 +9,7 @@ export function RadioGroup({
   return (
     <BaseRadioGroup
       data-slot="radio-group"
-      className={cn('flex flex-col gap-3', className)}
+      className={cn('flex flex-col gap-2.5', className)}
       {...props}
     />
   );
@@ -23,16 +23,18 @@ export function Radio({
     <BaseRadio.Root
       data-slot="radio"
       className={cn(
-        'size-4 flex items-center justify-center rounded-full border border-(--void-border) bg-(--void-bg-subtle)',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary)',
+        'size-[18px] flex items-center justify-center rounded-full',
+        'border border-(--void-border) bg-(--void-surface)',
+        'transition-all duration-150',
+        'hover:border-(--void-border-hover)',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary)/30',
         'data-checked:border-(--void-primary) data-checked:bg-(--void-primary)',
-        'transition-colors hover:border-(--void-border-hover)',
         'disabled:opacity-50 disabled:pointer-events-none',
         className
       )}
       {...props}
     >
-      <BaseRadio.Indicator className="size-2 rounded-full bg-white" />
+      <BaseRadio.Indicator className="size-2 rounded-full bg-(--void-primary-foreground)" />
     </BaseRadio.Root>
   );
 }
@@ -40,14 +42,35 @@ export function Radio({
 export interface RadioItemProps
   extends React.ComponentProps<typeof BaseRadio.Root> {
   label?: string;
+  description?: string;
 }
 
-export function RadioItem({ label, className, ...props }: RadioItemProps) {
+export function RadioItem({
+  label,
+  description,
+  className,
+  id,
+  ...props
+}: RadioItemProps) {
   return (
-    <label className="flex cursor-pointer items-center gap-3">
-      <Radio className={className} {...props} />
-      {label && (
-        <span className="font-mono text-sm text-(--void-text)">{label}</span>
+    <label
+      htmlFor={id}
+      className="group flex cursor-pointer items-start gap-2.5 select-none"
+    >
+      <Radio id={id} className={cn('mt-0.5', className)} {...props} />
+      {(label || description) && (
+        <div className="flex flex-col">
+          {label && (
+            <span className="text-sm text-(--void-text) group-has-disabled:opacity-50">
+              {label}
+            </span>
+          )}
+          {description && (
+            <span className="text-sm text-(--void-muted) group-has-disabled:opacity-50">
+              {description}
+            </span>
+          )}
+        </div>
       )}
     </label>
   );

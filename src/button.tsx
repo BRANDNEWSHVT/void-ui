@@ -64,6 +64,12 @@ export const buttonVariants = cva(
           'hover:bg-[var(--void-bg-muted)] hover:border-[var(--void-border-hover)]',
           'focus-visible:ring-[var(--void-muted)]',
         ],
+        'outline-danger': [
+          'bg-transparent text-[var(--void-danger)]',
+          'border border-[var(--void-danger)]/50',
+          'hover:bg-[var(--void-danger)]/10 hover:border-[var(--void-danger)]',
+          'focus-visible:ring-[var(--void-danger)]',
+        ],
       },
       size: {
         xs: 'h-7 px-2.5 text-xs rounded-md',

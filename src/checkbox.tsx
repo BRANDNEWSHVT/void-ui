@@ -1,5 +1,6 @@
 import { Checkbox as BaseCheckbox } from '@base-ui-components/react/checkbox';
 import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui-components/react/checkbox-group';
+import { Check, Minus } from '@phosphor-icons/react';
 import { cn } from './utils';
 
 export interface CheckboxProps
@@ -7,58 +8,37 @@ export interface CheckboxProps
   label?: string;
 }
 
-export function Checkbox({ label, className, ...props }: CheckboxProps) {
+export function Checkbox({ label, className, id, ...props }: CheckboxProps) {
   return (
-    <label className="flex cursor-pointer items-center gap-3">
+    <label
+      htmlFor={id}
+      className="group flex cursor-pointer items-center gap-2.5 select-none"
+    >
       <BaseCheckbox.Root
+        id={id}
         data-slot="checkbox"
         className={cn(
-          'flex h-5 w-5 items-center justify-center rounded border border-[var(--void-border)] bg-(--void-bg-subtle)',
-          'transition-colors hover:border-[var(--void-border-hover)]',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--void-primary)]',
-          'data-[checked]:border-[var(--void-primary)] data-[checked]:bg-[var(--void-primary)]',
+          'flex size-[18px] items-center justify-center rounded',
+          'border border-(--void-border) bg-(--void-surface)',
+          'transition-all duration-150',
+          'hover:border-(--void-border-hover)',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary)/30',
+          'data-checked:border-(--void-primary) data-checked:bg-(--void-primary)',
+          'data-indeterminate:border-(--void-primary) data-indeterminate:bg-(--void-primary)',
           'disabled:cursor-not-allowed disabled:opacity-50',
           className
         )}
         {...props}
       >
-        <BaseCheckbox.Indicator
-          className="text-white data-[unchecked]:hidden"
-          render={(indicatorProps, state) => (
-            <span {...indicatorProps}>
-              {state.indeterminate ? (
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
-              ) : (
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M10 3L4.5 8.5L2 6" />
-                </svg>
-              )}
-            </span>
-          )}
-        />
+        <BaseCheckbox.Indicator className="text-(--void-primary-foreground) data-unchecked:hidden">
+          <Check size={12} weight="bold" />
+        </BaseCheckbox.Indicator>
+        <BaseCheckbox.Indicator className="text-(--void-primary-foreground) data-unchecked:hidden data-checked:hidden">
+          <Minus size={12} weight="bold" />
+        </BaseCheckbox.Indicator>
       </BaseCheckbox.Root>
       {label && (
-        <span className="font-mono text-sm text-[var(--void-text)]">
+        <span className="text-sm text-(--void-text) group-has-disabled:opacity-50">
           {label}
         </span>
       )}
@@ -73,7 +53,7 @@ export function CheckboxGroup({
   return (
     <BaseCheckboxGroup
       data-slot="checkbox-group"
-      className={cn('flex flex-col gap-3', className)}
+      className={cn('flex flex-col gap-2.5', className)}
       {...props}
     />
   );

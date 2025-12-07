@@ -4,7 +4,7 @@
   --void-bg: #09090b;
   --void-surface: #18181b;
   --void-text: #fafafa;
-  --void-muted: #71717a;
+  --void-muted: #a1a1aa;
   --void-border: rgba(255, 255, 255, 0.08);
   --void-border-hover: rgba(255, 255, 255, 0.15);
   --void-bg-subtle: rgba(255, 255, 255, 0.03);
@@ -33,7 +33,7 @@
   /* Primary - Cyan */
   --void-primary: #06b6d4;
   --void-primary-hover: #22d3ee;
-  --void-primary-foreground: #000000;
+  --void-primary-foreground: #ffffff;
 
   /* Secondary - Zinc */
   --void-secondary: #3f3f46;
@@ -43,7 +43,7 @@
   /* Success - Emerald */
   --void-success: #10b981;
   --void-success-hover: #34d399;
-  --void-success-foreground: #000000;
+  --void-success-foreground: #ffffff;
 
   /* Warning - Amber */
   --void-warning: #f59e0b;
@@ -78,7 +78,9 @@
 }
 
 /* Light theme */
-[data-theme='light'] {
+[data-theme='light'],
+.light,
+:root.light {
   --void-bg: #fafafa;
   --void-surface: #ffffff;
   --void-text: #09090b;

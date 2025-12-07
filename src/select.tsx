@@ -5,107 +5,139 @@ import { cn } from './utils';
 export type SelectOption = {
   value: string;
   label: string;
+  disabled?: boolean;
 };
 
-export interface SelectProps
-  extends React.ComponentProps<typeof BaseSelect.Root> {
-  label?: string;
-  options: SelectOption[];
+export function Select(props: React.ComponentProps<typeof BaseSelect.Root>) {
+  return <BaseSelect.Root data-slot="select" {...props} />;
+}
+
+export interface SelectTriggerProps
+  extends React.ComponentProps<typeof BaseSelect.Trigger> {
   placeholder?: string;
 }
 
-export function Select({
-  label,
-  options,
-  placeholder = 'Select an option',
+export function SelectTrigger({
+  className,
+  placeholder = 'Select...',
   ...props
-}: SelectProps) {
-  return (
-    <div className="space-y-1.5">
-      {label && (
-        <label className="block text-sm font-medium text-(--void-text)">
-          {label}
-        </label>
-      )}
-      <BaseSelect.Root {...props}>
-        <SelectTrigger placeholder={placeholder} />
-        <SelectContent options={options} />
-      </BaseSelect.Root>
-    </div>
-  );
-}
-
-function SelectTrigger({ placeholder }: { placeholder: string }) {
+}: SelectTriggerProps) {
   return (
     <BaseSelect.Trigger
       data-slot="select-trigger"
       className={cn(
-        'flex h-10 w-full items-center justify-between rounded-lg px-3 py-2',
+        'flex h-10 w-full items-center justify-between rounded-lg px-3',
         'bg-(--void-surface) text-sm text-(--void-text)',
-        'border border-(--void-border) shadow-[var(--void-shadow-sm)]',
-        'transition-all duration-200',
+        'border border-(--void-border)',
+        'transition-colors duration-150',
         'hover:border-(--void-border-hover)',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary)/20 focus-visible:border-(--void-primary)',
-        'data-popup-open:border-(--void-primary) data-popup-open:ring-2 data-popup-open:ring-(--void-primary)/20'
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary)/30 focus-visible:border-(--void-primary)',
+        'data-popup-open:border-(--void-primary) data-popup-open:ring-2 data-popup-open:ring-(--void-primary)/30',
+        'disabled:opacity-50 disabled:pointer-events-none',
+        className
       )}
+      {...props}
     >
-      <BaseSelect.Value>
-        {(value) =>
-          value ?? <span className="text-(--void-muted)">{placeholder}</span>
-        }
-      </BaseSelect.Value>
+      <BaseSelect.Value aria-placeholder={placeholder} />
       <BaseSelect.Icon className="text-(--void-muted)">
-        <CaretDown size={14} weight="bold" />
+        <CaretDown size={14} />
       </BaseSelect.Icon>
     </BaseSelect.Trigger>
   );
 }
 
-function SelectContent({ options }: { options: SelectOption[] }) {
+export function SelectContent({
+  className,
+  children,
+  side = 'bottom',
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Positioner>) {
   return (
     <BaseSelect.Portal>
-      <BaseSelect.Positioner sideOffset={8}>
+      <BaseSelect.Positioner side={side} sideOffset={8} {...props}>
         <BaseSelect.Popup
           data-slot="select-content"
           className={cn(
-            'origin-(--transform-origin) rounded-lg p-1',
+            'origin-(--transform-origin) min-w-(--anchor-width) rounded-lg p-1.5',
             'bg-(--void-surface) border border-(--void-border)',
-            'shadow-[var(--void-shadow-lg)]',
-            'transition-all duration-200',
+            'shadow-(--void-shadow-lg)',
+            'transition-all duration-150',
+            'data-starting-style:scale-95 data-starting-style:opacity-0',
             'data-ending-style:scale-95 data-ending-style:opacity-0',
-            'data-starting-style:scale-95 data-starting-style:opacity-0'
+            className
           )}
         >
-          {options.map((option) => (
-            <BaseSelect.Item
-              key={option.value}
-              value={option.value}
-              className={cn(
-                'relative flex cursor-pointer select-none items-center rounded-md px-2 py-1.5',
-                'text-sm text-(--void-text) outline-none',
-                'transition-colors duration-150',
-                'data-highlighted:bg-(--void-bg-muted) data-highlighted:text-(--void-text)'
-              )}
-            >
-              <BaseSelect.ItemText>{option.label}</BaseSelect.ItemText>
-              <BaseSelect.ItemIndicator className="ml-auto text-(--void-primary)">
-                <Check size={14} weight="bold" />
-              </BaseSelect.ItemIndicator>
-            </BaseSelect.Item>
-          ))}
+          {children}
         </BaseSelect.Popup>
       </BaseSelect.Positioner>
     </BaseSelect.Portal>
   );
 }
 
-// Export individual parts for composition
-export const SelectRoot = BaseSelect.Root;
-export const SelectValue = BaseSelect.Value;
-export const SelectIcon = BaseSelect.Icon;
-export const SelectPortal = BaseSelect.Portal;
-export const SelectPositioner = BaseSelect.Positioner;
-export const SelectPopup = BaseSelect.Popup;
-export const SelectItem = BaseSelect.Item;
-export const SelectItemText = BaseSelect.ItemText;
-export const SelectItemIndicator = BaseSelect.ItemIndicator;
+export function SelectItem({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Item>) {
+  return (
+    <BaseSelect.Item
+      data-slot="select-item"
+      className={cn(
+        'relative flex cursor-pointer select-none items-center rounded-md px-2.5 py-1.5 pr-8',
+        'text-sm text-(--void-text) outline-none',
+        'transition-colors duration-100',
+        'data-highlighted:bg-(--void-bg-muted)',
+        'data-disabled:pointer-events-none data-disabled:opacity-50',
+        className
+      )}
+      {...props}
+    >
+      <BaseSelect.ItemText>{children}</BaseSelect.ItemText>
+      <BaseSelect.ItemIndicator className="absolute right-2 text-(--void-primary)">
+        <Check size={14} weight="bold" />
+      </BaseSelect.ItemIndicator>
+    </BaseSelect.Item>
+  );
+}
+
+export function SelectGroup({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Group>) {
+  return (
+    <BaseSelect.Group
+      data-slot="select-group"
+      className={cn(className)}
+      {...props}
+    />
+  );
+}
+
+export function SelectGroupLabel({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseSelect.GroupLabel>) {
+  return (
+    <BaseSelect.GroupLabel
+      data-slot="select-group-label"
+      className={cn(
+        'px-2.5 py-1.5 text-xs font-medium text-(--void-muted)',
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+export function SelectSeparator({
+  className,
+  ...props
+}: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="select-separator"
+      className={cn('my-1.5 h-px bg-(--void-border)', className)}
+      {...props}
+    />
+  );
+}

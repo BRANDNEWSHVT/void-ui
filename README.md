@@ -1,17 +1,13 @@
 # Void UI
 
-A dark-first React component library built on [Base UI](https://base-ui.com) and [Tailwind CSS](https://tailwindcss.com).
+A dark-first, composable React component library built on [Base UI](https://base-ui.com) and [Tailwind CSS v4](https://tailwindcss.com).
+
+> **Note:** This is an experimental personal project. APIs may change without notice.
 
 ## Installation
 
 ```bash
-npm install void-ui
-# or
-yarn add void-ui
-# or
-pnpm add void-ui
-# or
-bun add void-ui
+pnpm add @radenadri/void-ui
 ```
 
 ## Requirements
@@ -21,37 +17,26 @@ bun add void-ui
 
 ## Setup
 
-### 1. Import the styles
-
-Add the Void UI styles to your main CSS file:
+### 1. Import Styles
 
 ```css
-@import "void-ui/styles.css";
+/* app.css */
+@import "tailwindcss";
+@import "@radenadri/void-ui/styles.css";
+
+@source "../node_modules/@radenadri/void-ui/dist";
 ```
 
-Or import in your entry file:
+### 2. Add Dark Class
 
-```tsx
-import "void-ui/styles.css";
-```
-
-### 2. Configure Tailwind CSS
-
-Make sure your `tailwind.config.js` includes the Void UI package:
-
-```js
-export default {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/void-ui/dist/**/*.{js,ts,jsx,tsx}",
-  ],
-};
+```html
+<html class="dark">
 ```
 
 ## Usage
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardBody } from "void-ui";
+import { Button, Card, CardHeader, CardTitle, CardContent } from '@radenadri/void-ui'
 
 function App() {
   return (
@@ -59,65 +44,69 @@ function App() {
       <CardHeader>
         <CardTitle>Welcome to Void UI</CardTitle>
       </CardHeader>
-      <CardBody>
-        <Button variant="primary">Get Started</Button>
-      </CardBody>
+      <CardContent>
+        <Button>Get Started</Button>
+      </CardContent>
     </Card>
-  );
+  )
 }
 ```
 
 ## Components
 
 ### Layout
-- `Stack` - Flexbox layout helper
-- `Separator` - Horizontal/vertical divider
-- `Divider` - Divider with optional text
+- **Stack** - Flexbox layout with spacing
+- **Separator** - Horizontal/vertical divider
 
 ### Forms
-- `Button` - Primary, Secondary, Ghost, Danger variants
-- `Input` - Text input with label and validation
-- `Textarea` - Multi-line text input
-- `Checkbox` - Checkbox with label
-- `Switch` - Toggle switch
-- `Radio` - Radio buttons
-- `Select` - Dropdown select
-- `Slider` - Range slider
-- `Field` - Form field wrapper
-- `Fieldset` - Group of form fields
+- **Button** - Multiple variants and sizes
+- **Input** - Text input
+- **Textarea** - Multi-line input
+- **Checkbox** - Checkbox with group support
+- **Switch** - Toggle with label/description
+- **Radio** - Radio group
+- **Select** - Composable dropdown (SelectTrigger, SelectContent, SelectItem)
+- **Slider** - Range slider with value display
+- **Field** - Form field wrapper (FieldRoot, FieldLabel, FieldDescription, FieldError)
+- **Fieldset** - Group of fields
+- **NumberField** - Numeric input with increment/decrement
 
 ### Display
-- `Alert` - Notification banners
-- `Avatar` - User avatar
-- `Badge` - Status badges
-- `Card` - Content container
-- `Chip` - Tags/chips
-- `IconBox` - Icon container
-- `Item` - List item
-- `Spinner` - Loading spinner
-- `Table` - Data table
-- `Heading` - Semantic headings
-- `Text` - Paragraph text
-- `Label` - Form labels
-- `Kbd` - Keyboard shortcuts
+- **Alert** - Contextual feedback
+- **Avatar** - User avatar with fallback
+- **Badge** - Status indicators
+- **Card** - Content container
+- **Spinner** - Loading indicator
+- **Table** - Data table (TableContainer, TableHeader, TableBody, etc.)
+- **Text** - Typography
+- **Heading** - Semantic headings
+- **Kbd** - Keyboard shortcuts
 
 ### Navigation
-- `Tabs` - Tab navigation
-- `Accordion` - Collapsible sections
-- `Pagination` - Page navigation
-- `Menu` - Dropdown menu
-- `Dropdown` - Enhanced dropdown
+- **Tabs** - Tab panels (Tabs, TabsList, TabsTrigger, TabsContent)
+- **Accordion** - Collapsible sections
+- **Pagination** - Page navigation
+- **Menu** - Dropdown menu
+- **Dropdown** - Enhanced dropdown with checkbox items
 
 ### Overlay
-- `Dialog` - Modal dialog
-- `AlertDialog` - Confirmation dialog
-- `Popover` - Floating popover
-- `Tooltip` - Hover tooltip
-- `Toast` - Notification toasts
-- `Collapsible` - Collapsible panel
+- **Dialog** - Modal dialog
+- **AlertDialog** - Confirmation dialog
+- **Popover** - Floating content
+- **Tooltip** - Hover hints
+- **Toast** - Notifications
+- **Collapsible** - Expandable panel
 
 ### Feedback
-- `Progress` - Progress bar
+- **Progress** - Progress bar with variants
+
+## Icons
+
+Void UI re-exports [Phosphor Icons](https://phosphoricons.com):
+
+```tsx
+import { Bell, Gear, User } from '@radenadri/void-ui'
+```
 
 ## License
 
