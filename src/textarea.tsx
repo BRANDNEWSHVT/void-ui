@@ -5,7 +5,7 @@ export const textareaVariants = cva(
   [
     'w-full text-(--void-text) placeholder:text-(--void-muted) font-mono text-sm',
     'rounded-lg border border-(--void-border) bg-(--void-bg-subtle) transition-colors',
-    'focus:border-(--void-accent) focus:outline-none focus:ring-1 focus:ring-(--void-accent)',
+    'focus:border-(--void-primary) focus:outline-none focus:ring-1 focus:ring-(--void-primary)',
     'disabled:opacity-50 disabled:cursor-not-allowed',
   ],
   {

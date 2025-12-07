@@ -15,7 +15,7 @@ export function TextLink({ className, ...props }: React.ComponentProps<'a'>) {
     <a
       data-slot="text-link"
       className={cn(
-        'text-(--void-text) underline underline-offset-2 hover:text-(--void-accent) transition-colors',
+        'text-(--void-text) underline underline-offset-2 hover:text-(--void-primary) transition-colors',
         className
       )}
       {...props}
@@ -41,7 +41,7 @@ export function Code({ className, ...props }: React.ComponentProps<'code'>) {
     <code
       data-slot="text-code"
       className={cn(
-        'font-mono text-sm text-(--void-accent) bg-(--void-bg-subtle) px-1.5 py-0.5 rounded',
+        'font-mono text-sm text-(--void-primary) bg-(--void-bg-subtle) px-1.5 py-0.5 rounded',
         className
       )}
       {...props}

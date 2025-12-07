@@ -42,8 +42,8 @@ export function AccordionTrigger({
         className={cn(
           'flex w-full items-center justify-between px-4 py-3',
           'font-mono text-sm text-(--void-text) transition-colors',
-          'hover:bg-(--void-bg-subtle) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--void-accent)',
-          'data-panel-open:text-(--void-accent)',
+          'hover:bg-(--void-bg-subtle) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--void-primary)',
+          'data-panel-open:text-(--void-primary)',
           className
         )}
         {...props}

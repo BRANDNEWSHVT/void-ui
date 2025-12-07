@@ -16,31 +16,35 @@ export function Input({
   ...props
 }: InputProps) {
   return (
-    <Field.Root>
+    <Field.Root className="space-y-1.5">
       {label && (
-        <Field.Label className="mb-2 block font-mono text-xs uppercase tracking-wider text-[var(--void-muted)]">
+        <Field.Label className="block text-sm font-medium text-[var(--void-text)]">
           {label}
         </Field.Label>
       )}
       <BaseInput
         data-slot="input"
         className={cn(
-          'w-full rounded-lg border border-[var(--void-border)] bg-(--void-bg-subtle) px-4 py-3',
-          'font-mono text-sm text-[var(--void-text)] placeholder:text-[var(--void-muted)]',
-          'transition-colors focus:border-[var(--void-accent)] focus:outline-none focus:ring-1 focus:ring-[var(--void-accent)]',
-          'data-[invalid]:border-[var(--void-accent)] data-[invalid]:ring-1 data-[invalid]:ring-[var(--void-accent)]',
-          'disabled:cursor-not-allowed disabled:opacity-50',
+          'flex h-10 w-full rounded-lg px-3 py-2',
+          'bg-[var(--void-surface)] text-sm text-[var(--void-text)]',
+          'border border-[var(--void-border)] shadow-[var(--void-shadow-sm)]',
+          'placeholder:text-[var(--void-muted)]',
+          'transition-all duration-200',
+          'hover:border-[var(--void-border-hover)]',
+          'focus:border-[var(--void-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--void-primary)]/20',
+          'data-invalid:border-[var(--void-danger)] data-invalid:ring-2 data-invalid:ring-[var(--void-danger)]/20',
+          'disabled:pointer-events-none disabled:opacity-50 disabled:bg-[var(--void-bg-muted)]',
           className
         )}
         {...props}
       />
       {description && (
-        <Field.Description className="mt-2 font-mono text-xs text-[var(--void-muted)]">
+        <Field.Description className="text-sm text-[var(--void-muted)]">
           {description}
         </Field.Description>
       )}
       {error && (
-        <Field.Error className="mt-2 font-mono text-xs text-[var(--void-accent)]">
+        <Field.Error className="text-sm text-[var(--void-danger)]">
           {error}
         </Field.Error>
       )}

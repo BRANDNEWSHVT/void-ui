@@ -16,9 +16,9 @@ export function AlertDialogTrigger({
     <BaseAlertDialog.Trigger
       data-slot="alert-dialog-trigger"
       className={cn(
-        'inline-flex items-center justify-center rounded-full border border-(--void-accent) bg-transparent px-6 py-3',
-        'font-mono text-sm uppercase tracking-wider text-(--void-accent) transition-all',
-        'hover:bg-(--void-accent) hover:text-white',
+        'inline-flex items-center justify-center rounded-full border border-(--void-danger) bg-transparent px-6 py-3',
+        'font-mono text-sm uppercase tracking-wider text-(--void-danger) transition-all',
+        'hover:bg-(--void-danger) hover:text-white',
         className
       )}
       {...props}

@@ -2,33 +2,41 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from './utils';
 
 export const badgeVariants = cva(
-  'inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider',
+  'inline-flex items-center justify-center gap-1 font-medium whitespace-nowrap',
   {
     variants: {
       variant: {
-        default: 'bg-(--void-bg-muted) text-(--void-text)',
-        primary: 'bg-(--void-accent) text-white',
-        'primary-subtle': 'bg-(--void-accent)/15 text-(--void-accent)',
-        'primary-outline': 'border border-(--void-accent) text-(--void-accent)',
-        secondary: 'bg-(--void-bg-muted) text-(--void-text)',
-        'secondary-outline': 'border border-(--void-border) text-(--void-text)',
-        success: 'bg-emerald-500 text-white',
-        'success-subtle': 'bg-emerald-500/15 text-emerald-400',
-        'success-outline': 'border border-emerald-500 text-emerald-400',
-        warning: 'bg-amber-500 text-black',
-        'warning-subtle': 'bg-amber-500/15 text-amber-400',
-        'warning-outline': 'border border-amber-500 text-amber-400',
-        danger: 'bg-red-500 text-white',
-        'danger-subtle': 'bg-red-500/15 text-red-400',
-        'danger-outline': 'border border-red-500 text-red-400',
-        info: 'bg-blue-500 text-white',
-        'info-subtle': 'bg-blue-500/15 text-blue-400',
-        'info-outline': 'border border-blue-500 text-blue-400',
+        default:
+          'bg-(--void-bg-muted) text-(--void-text) border border-(--void-border)',
+        primary:
+          'bg-[var(--void-primary)] text-[var(--void-primary-foreground)]',
+        'primary-subtle':
+          'bg-[var(--void-primary)]/10 text-[var(--void-primary)] border border-[var(--void-primary)]/20',
+        secondary:
+          'bg-[var(--void-secondary)] text-[var(--void-secondary-foreground)]',
+        'secondary-subtle':
+          'bg-[var(--void-bg-muted)] text-[var(--void-muted)] border border-(--void-border)',
+        success:
+          'bg-[var(--void-success)] text-[var(--void-success-foreground)]',
+        'success-subtle':
+          'bg-[var(--void-success)]/10 text-[var(--void-success)] border border-[var(--void-success)]/20',
+        warning:
+          'bg-[var(--void-warning)] text-[var(--void-warning-foreground)]',
+        'warning-subtle':
+          'bg-[var(--void-warning)]/10 text-[var(--void-warning)] border border-[var(--void-warning)]/20',
+        danger: 'bg-[var(--void-danger)] text-[var(--void-danger-foreground)]',
+        'danger-subtle':
+          'bg-[var(--void-danger)]/10 text-[var(--void-danger)] border border-[var(--void-danger)]/20',
+        info: 'bg-[var(--void-info)] text-[var(--void-info-foreground)]',
+        'info-subtle':
+          'bg-[var(--void-info)]/10 text-[var(--void-info)] border border-[var(--void-info)]/20',
+        outline:
+          'bg-transparent text-(--void-text) border border-(--void-border)',
       },
       size: {
-        sm: 'px-1.5 h-5 rounded text-[10px]',
-        md: 'px-2 h-6 rounded',
-        lg: 'px-2.5 h-7 rounded',
+        sm: 'h-5 px-1.5 text-[10px] rounded',
+        md: 'h-6 px-2 text-xs rounded-md',
+        lg: 'h-7 px-2.5 text-sm rounded-md',
       },
       pill: {
         true: 'rounded-full',

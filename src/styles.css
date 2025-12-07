@@ -1,34 +1,146 @@
 /* Void UI CSS Variables */
 :root {
   /* Dark theme (default) */
-  --void-bg: #0a0a0a;
-  --void-surface: #111111;
+  --void-bg: #09090b;
+  --void-surface: #18181b;
   --void-text: #fafafa;
-  --void-muted: #737373;
-  --void-border: #262626;
-  --void-border-hover: #404040;
-  --void-accent: #ff2a00;
-  --void-accent-hover: #ff4d26;
-  --void-accent-alt: #ff6b00;
-  --void-bg-subtle: rgba(255, 255, 255, 0.05);
-  --void-bg-muted: rgba(255, 255, 255, 0.1);
-  --void-bg-emphasis: rgba(255, 255, 255, 0.15);
+  --void-muted: #71717a;
+  --void-border: rgba(255, 255, 255, 0.08);
+  --void-border-hover: rgba(255, 255, 255, 0.15);
+  --void-bg-subtle: rgba(255, 255, 255, 0.03);
+  --void-bg-muted: rgba(255, 255, 255, 0.06);
+  --void-bg-emphasis: rgba(255, 255, 255, 0.1);
+
+  /* Glass effect */
+  --void-glass: rgba(24, 24, 27, 0.8);
+  --void-glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Shadows - layered for depth */
+  --void-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --void-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --void-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5),
+    0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --void-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5),
+    0 8px 10px -6px rgba(0, 0, 0, 0.4);
+
+  /* Glow effects */
+  --void-glow-primary: 0 0 20px rgba(6, 182, 212, 0.3),
+    0 0 40px rgba(6, 182, 212, 0.1);
+  --void-glow-success: 0 0 20px rgba(16, 185, 129, 0.3);
+  --void-glow-danger: 0 0 20px rgba(244, 63, 94, 0.3);
+
+  /* Primary - Cyan */
+  --void-primary: #06b6d4;
+  --void-primary-hover: #22d3ee;
+  --void-primary-foreground: #000000;
+
+  /* Secondary - Zinc */
+  --void-secondary: #3f3f46;
+  --void-secondary-hover: #52525b;
+  --void-secondary-foreground: #fafafa;
+
+  /* Success - Emerald */
+  --void-success: #10b981;
+  --void-success-hover: #34d399;
+  --void-success-foreground: #000000;
+
+  /* Warning - Amber */
+  --void-warning: #f59e0b;
+  --void-warning-hover: #fbbf24;
+  --void-warning-foreground: #000000;
+
+  /* Danger - Rose */
+  --void-danger: #f43f5e;
+  --void-danger-hover: #fb7185;
+  --void-danger-foreground: #ffffff;
+
+  /* Info - Sky */
+  --void-info: #0ea5e9;
+  --void-info-hover: #38bdf8;
+  --void-info-foreground: #000000;
+
+  /* Radius */
+  --void-radius-sm: 0.375rem;
+  --void-radius-md: 0.5rem;
+  --void-radius-lg: 0.75rem;
+  --void-radius-xl: 1rem;
+
+  /* Transitions */
+  --void-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --void-transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --void-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Legacy accent (kept for compatibility) */
+  --void-accent: #06b6d4;
+  --void-accent-hover: #22d3ee;
+  --void-accent-alt: #0891b2;
 }
 
 /* Light theme */
 [data-theme='light'] {
   --void-bg: #fafafa;
   --void-surface: #ffffff;
-  --void-text: #0a0a0a;
-  --void-muted: #737373;
-  --void-border: #e5e5e5;
-  --void-border-hover: #d4d4d4;
-  --void-accent: #ff2a00;
-  --void-accent-hover: #e62600;
-  --void-accent-alt: #ff6b00;
-  --void-bg-subtle: rgba(0, 0, 0, 0.03);
-  --void-bg-muted: rgba(0, 0, 0, 0.06);
-  --void-bg-emphasis: rgba(0, 0, 0, 0.1);
+  --void-text: #09090b;
+  --void-muted: #71717a;
+  --void-border: rgba(0, 0, 0, 0.08);
+  --void-border-hover: rgba(0, 0, 0, 0.15);
+  --void-bg-subtle: rgba(0, 0, 0, 0.02);
+  --void-bg-muted: rgba(0, 0, 0, 0.04);
+  --void-bg-emphasis: rgba(0, 0, 0, 0.08);
+
+  /* Glass effect */
+  --void-glass: rgba(255, 255, 255, 0.8);
+  --void-glass-border: rgba(0, 0, 0, 0.08);
+
+  /* Shadows - softer for light theme */
+  --void-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --void-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08),
+    0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --void-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --void-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.05);
+
+  /* Glow effects - subtle for light */
+  --void-glow-primary: 0 0 20px rgba(6, 182, 212, 0.2);
+  --void-glow-success: 0 0 20px rgba(16, 185, 129, 0.2);
+  --void-glow-danger: 0 0 20px rgba(244, 63, 94, 0.2);
+
+  /* Primary - Cyan */
+  --void-primary: #0891b2;
+  --void-primary-hover: #0e7490;
+  --void-primary-foreground: #ffffff;
+
+  /* Secondary - Zinc */
+  --void-secondary: #e4e4e7;
+  --void-secondary-hover: #d4d4d8;
+  --void-secondary-foreground: #09090b;
+
+  /* Success - Emerald */
+  --void-success: #059669;
+  --void-success-hover: #047857;
+  --void-success-foreground: #ffffff;
+
+  /* Warning - Amber */
+  --void-warning: #d97706;
+  --void-warning-hover: #b45309;
+  --void-warning-foreground: #000000;
+
+  /* Danger - Rose */
+  --void-danger: #e11d48;
+  --void-danger-hover: #be123c;
+  --void-danger-foreground: #ffffff;
+
+  /* Info - Sky */
+  --void-info: #0284c7;
+  --void-info-hover: #0369a1;
+  --void-info-foreground: #ffffff;
+
+  /* Legacy accent */
+  --void-accent: #0891b2;
+  --void-accent-hover: #0e7490;
+  --void-accent-alt: #06b6d4;
 }
 
 /* Animations */

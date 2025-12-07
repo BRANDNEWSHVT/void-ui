@@ -6,9 +6,11 @@ export const chipVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-(--void-bg-subtle) border-(--void-border) text-(--void-text)',
-        primary: 'bg-(--void-accent) border-(--void-accent) text-white',
-        secondary: 'bg-(--void-bg-muted) border-(--void-border) text-(--void-text)',
+        default:
+          'bg-(--void-bg-subtle) border-(--void-border) text-(--void-text)',
+        primary: 'bg-(--void-primary) border-(--void-primary) text-white',
+        secondary:
+          'bg-(--void-bg-muted) border-(--void-border) text-(--void-text)',
         success: 'bg-emerald-500 border-emerald-500 text-white',
         warning: 'bg-amber-500 border-amber-500 text-black',
         danger: 'bg-red-500 border-red-500 text-white',

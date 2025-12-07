@@ -22,14 +22,14 @@ export function Slider({ label, className, ...props }: SliderProps) {
         <BaseSlider.Track className="h-2 w-full rounded-full bg-(--void-bg-muted)">
           <BaseSlider.Indicator
             data-slot="slider-indicator"
-            className="h-full rounded-full bg-(--void-accent) shadow-[0_0_10px_var(--void-accent)]"
+            className="h-full rounded-full bg-(--void-primary) shadow-[0_0_10px_var(--void-primary)]"
           />
           <BaseSlider.Thumb
             data-slot="slider-thumb"
             className={cn(
-              'block h-5 w-5 rounded-full border-2 border-(--void-accent) bg-(--void-bg) shadow-lg',
+              'block h-5 w-5 rounded-full border-2 border-(--void-primary) bg-(--void-bg) shadow-lg',
               'transition-transform hover:scale-110',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-accent)'
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary)'
             )}
           />
         </BaseSlider.Track>

@@ -265,3 +265,6 @@ export { Text, TextLink, Strong, Code } from './text'
 
 // Textarea
 export { Textarea, textareaVariants } from './textarea'
+
+// Icons (re-export from Phosphor)
+export * from './icons'

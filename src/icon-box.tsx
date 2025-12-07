@@ -7,8 +7,8 @@ export const iconBoxVariants = cva(
     variants: {
       variant: {
         default: 'bg-(--void-bg-muted) text-(--void-text)',
-        primary: 'bg-(--void-accent) text-white',
-        'primary-subtle': 'bg-(--void-accent)/10 text-(--void-accent)',
+        primary: 'bg-(--void-primary) text-white',
+        'primary-subtle': 'bg-(--void-primary)/10 text-(--void-primary)',
         secondary: 'bg-(--void-bg-muted) text-(--void-text)',
         success: 'bg-emerald-500 text-white',
         'success-subtle': 'bg-emerald-500/10 text-emerald-400',

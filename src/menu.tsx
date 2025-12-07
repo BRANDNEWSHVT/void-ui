@@ -23,7 +23,7 @@ export function MenuTrigger({
       className={cn(
         'inline-flex items-center justify-center gap-2 rounded-full border border-(--void-border) bg-(--void-bg-subtle) px-4 py-2',
         'font-mono text-sm text-(--void-text) transition-colors',
-        'hover:border-(--void-border-hover) hover:bg-(--void-bg-muted) data-[popup-open]:border-(--void-accent)',
+        'hover:border-(--void-border-hover) hover:bg-(--void-bg-muted) data-[popup-open]:border-(--void-primary)',
         className
       )}
       {...props}
@@ -81,7 +81,7 @@ export function MenuItem({
       className={cn(
         'flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2',
         'font-mono text-sm text-(--void-text) outline-none transition-colors',
-        'data-[highlighted]:bg-(--void-bg-muted) data-[highlighted]:text-(--void-accent)',
+        'data-[highlighted]:bg-(--void-bg-muted) data-[highlighted]:text-(--void-primary)',
         className
       )}
       {...props}

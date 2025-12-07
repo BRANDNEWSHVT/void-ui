@@ -22,7 +22,8 @@ export function TabsList({
     <BaseTabs.List
       data-slot="tabs-list"
       className={cn(
-        'flex gap-1 rounded-full border border-(--void-border) bg-(--void-bg-subtle) p-1',
+        'inline-flex h-10 items-center justify-center gap-1 rounded-lg p-1',
+        'bg-(--void-bg-muted) border border-(--void-border)',
         className
       )}
       {...props}
@@ -38,9 +39,13 @@ export function TabsTrigger({
     <BaseTabs.Tab
       data-slot="tabs-trigger"
       className={cn(
-        'rounded-full px-4 py-2 font-mono text-sm text-(--void-muted) transition-colors',
-        'hover:text-(--void-text) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-accent)',
-        'data-selected:bg-(--void-accent) data-selected:text-white',
+        'inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5',
+        'text-sm font-medium text-(--void-muted)',
+        'transition-all duration-200',
+        'hover:text-(--void-text)',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary) focus-visible:ring-offset-2',
+        'disabled:pointer-events-none disabled:opacity-50',
+        'data-selected:bg-(--void-surface) data-selected:text-(--void-text) data-selected:shadow-[var(--void-shadow-sm)]',
         className
       )}
       {...props}
@@ -69,7 +74,7 @@ export function TabsIndicator({
     <BaseTabs.Indicator
       data-slot="tabs-indicator"
       className={cn(
-        'absolute h-full rounded-full bg-(--void-accent) transition-all',
+        'absolute h-full rounded-full bg-(--void-primary) transition-all',
         className
       )}
       {...props}

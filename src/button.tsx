@@ -3,34 +3,76 @@ import { cn } from './utils';
 
 export const buttonVariants = cva(
   [
-    'inline-flex items-center justify-center font-mono text-sm uppercase tracking-wider',
-    'transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--void-accent)]',
-    'focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--void-bg)]',
-    'active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50',
+    'relative inline-flex items-center justify-center gap-2 font-medium text-sm',
+    'transition-all duration-200 ease-out',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--void-bg)]',
+    'active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50',
   ],
   {
     variants: {
       variant: {
+        default: [
+          'bg-[var(--void-surface)] text-[var(--void-text)]',
+          'border border-[var(--void-border)] shadow-[var(--void-shadow-sm)]',
+          'hover:bg-[var(--void-bg-muted)] hover:border-[var(--void-border-hover)]',
+          'focus-visible:ring-[var(--void-muted)]',
+        ],
         primary: [
-          'bg-[var(--void-accent)] text-white',
-          'hover:bg-[var(--void-accent)]/90 hover:shadow-[0_0_20px_rgba(255,42,0,0.4)]',
-          'disabled:hover:shadow-none',
+          'bg-[var(--void-primary)] text-[var(--void-primary-foreground)] font-semibold',
+          'shadow-[var(--void-shadow-md)]',
+          'hover:bg-[var(--void-primary-hover)] hover:shadow-[var(--void-glow-primary)]',
+          'focus-visible:ring-[var(--void-primary)]',
         ],
         secondary: [
-          'border border-[var(--void-border)] bg-(--void-bg-subtle) text-[var(--void-text)] backdrop-blur',
-          'hover:border-[var(--void-border-hover)] hover:bg-(--void-bg-muted)',
+          'bg-[var(--void-secondary)] text-[var(--void-secondary-foreground)]',
+          'shadow-[var(--void-shadow-sm)]',
+          'hover:bg-[var(--void-secondary-hover)]',
+          'focus-visible:ring-[var(--void-secondary)]',
         ],
-        ghost: ['text-[var(--void-text)]', 'hover:text-[var(--void-accent)]'],
+        success: [
+          'bg-[var(--void-success)] text-[var(--void-success-foreground)] font-semibold',
+          'shadow-[var(--void-shadow-md)]',
+          'hover:bg-[var(--void-success-hover)] hover:shadow-[var(--void-glow-success)]',
+          'focus-visible:ring-[var(--void-success)]',
+        ],
+        warning: [
+          'bg-[var(--void-warning)] text-[var(--void-warning-foreground)] font-semibold',
+          'shadow-[var(--void-shadow-md)]',
+          'hover:bg-[var(--void-warning-hover)]',
+          'focus-visible:ring-[var(--void-warning)]',
+        ],
         danger: [
-          'border border-[var(--void-accent)] bg-transparent text-[var(--void-accent)]',
-          'hover:bg-[var(--void-accent)] hover:text-white',
+          'bg-[var(--void-danger)] text-[var(--void-danger-foreground)] font-semibold',
+          'shadow-[var(--void-shadow-md)]',
+          'hover:bg-[var(--void-danger-hover)] hover:shadow-[var(--void-glow-danger)]',
+          'focus-visible:ring-[var(--void-danger)]',
+        ],
+        ghost: [
+          'text-[var(--void-muted)]',
+          'hover:bg-[var(--void-bg-muted)] hover:text-[var(--void-text)]',
+          'focus-visible:ring-[var(--void-muted)]',
+        ],
+        outline: [
+          'bg-transparent text-[var(--void-primary)]',
+          'border border-[var(--void-primary)]/50',
+          'hover:bg-[var(--void-primary)]/10 hover:border-[var(--void-primary)]',
+          'focus-visible:ring-[var(--void-primary)]',
+        ],
+        'outline-secondary': [
+          'bg-transparent text-[var(--void-text)]',
+          'border border-[var(--void-border)]',
+          'hover:bg-[var(--void-bg-muted)] hover:border-[var(--void-border-hover)]',
+          'focus-visible:ring-[var(--void-muted)]',
         ],
       },
       size: {
-        sm: 'h-8 px-4 py-2 rounded-full',
-        md: 'h-10 px-6 py-3 rounded-full',
-        lg: 'h-12 px-8 py-4 rounded-full',
-        icon: 'h-10 w-10 rounded-full',
+        xs: 'h-7 px-2.5 text-xs rounded-md',
+        sm: 'h-8 px-3 text-sm rounded-md',
+        md: 'h-9 px-4 text-sm rounded-lg',
+        lg: 'h-11 px-6 text-base rounded-lg',
+        icon: 'h-9 w-9 rounded-lg',
+        'icon-sm': 'h-7 w-7 rounded-md',
+        'icon-lg': 'h-11 w-11 rounded-lg',
       },
     },
     defaultVariants: {

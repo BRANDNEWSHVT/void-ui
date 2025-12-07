@@ -50,7 +50,7 @@ export function FieldError({
   return (
     <BaseField.Error
       data-slot="field-error"
-      className={cn('text-(--void-accent) text-sm', className)}
+      className={cn('text-(--void-danger) text-sm', className)}
       {...props}
     />
   );

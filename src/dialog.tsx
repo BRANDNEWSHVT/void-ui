@@ -1,4 +1,5 @@
 import { Dialog as BaseDialog } from '@base-ui-components/react/dialog';
+import { X } from '@phosphor-icons/react';
 import { cn } from './utils';
 
 export function Dialog(props: React.ComponentProps<typeof BaseDialog.Root>) {
@@ -13,9 +14,10 @@ export function DialogTrigger({
     <BaseDialog.Trigger
       data-slot="dialog-trigger"
       className={cn(
-        'inline-flex items-center justify-center rounded-full bg-(--void-accent) px-6 py-3',
-        'font-mono text-sm uppercase tracking-wider text-white transition-all',
-        'hover:bg-(--void-accent)/90 hover:shadow-[0_0_20px_rgba(255,42,0,0.4)]',
+        'inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2',
+        'bg-(--void-primary) text-(--void-primary-foreground) font-medium text-sm',
+        'shadow-[var(--void-shadow-md)] transition-all duration-200',
+        'hover:bg-(--void-primary-hover) hover:shadow-[var(--void-glow-primary)]',
         className
       )}
       {...props}
@@ -32,18 +34,21 @@ export function DialogContent({
     <BaseDialog.Portal>
       <BaseDialog.Backdrop
         className={cn(
-          'fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity',
-          'data-[ending-style]:opacity-0 data-[starting-style]:opacity-0'
+          'fixed inset-0 bg-black/50 backdrop-blur-sm',
+          'transition-opacity duration-200',
+          'data-ending-style:opacity-0 data-starting-style:opacity-0'
         )}
       />
       <BaseDialog.Popup
         data-slot="dialog-content"
         className={cn(
-          'fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2',
-          'rounded-2xl border border-(--void-border) bg-(--void-bg) p-6',
-          'shadow-[0_20px_80px_rgba(0,0,0,0.5)]',
-          'transition-[transform,opacity] data-[ending-style]:scale-95 data-[ending-style]:opacity-0',
-          'data-[starting-style]:scale-95 data-[starting-style]:opacity-0',
+          'fixed left-1/2 top-1/2 w-full max-w-lg -translate-x-1/2 -translate-y-1/2',
+          'rounded-xl bg-[var(--void-surface)] p-6',
+          'border border-[var(--void-glass-border)]',
+          'shadow-[var(--void-shadow-xl)]',
+          'transition-all duration-200',
+          'data-ending-style:scale-95 data-ending-style:opacity-0',
+          'data-starting-style:scale-95 data-starting-style:opacity-0',
           className
         )}
         {...props}
@@ -75,10 +80,7 @@ export function DialogTitle({
   return (
     <BaseDialog.Title
       data-slot="dialog-title"
-      className={cn(
-        'mb-2 font-sans text-xl font-bold uppercase tracking-tight text-(--void-text)',
-        className
-      )}
+      className={cn('text-lg font-semibold text-(--void-text)', className)}
       {...props}
     />
   );
@@ -91,7 +93,7 @@ export function DialogDescription({
   return (
     <BaseDialog.Description
       data-slot="dialog-description"
-      className={cn('font-mono text-sm text-(--void-muted)', className)}
+      className={cn('text-sm text-(--void-muted) mt-1', className)}
       {...props}
     />
   );
@@ -104,7 +106,7 @@ export function DialogFooter({
   return (
     <footer
       data-slot="dialog-footer"
-      className={cn('mt-6 flex justify-end gap-3', className)}
+      className={cn('mt-6 flex items-center justify-end gap-2', className)}
       {...props}
     />
   );
@@ -118,20 +120,14 @@ export function DialogClose({
     <BaseDialog.Close
       data-slot="dialog-close"
       className={cn(
-        'rounded-full p-2 text-(--void-muted) transition-colors',
+        'absolute right-4 top-4 rounded-lg p-1.5',
+        'text-(--void-muted) transition-colors duration-200',
         'hover:bg-(--void-bg-muted) hover:text-(--void-text)',
         className
       )}
       {...props}
     >
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path
-          d="M12 4L4 12M4 4L12 12"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
+      <X size={16} weight="bold" />
     </BaseDialog.Close>
   );
 }

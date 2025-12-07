@@ -15,8 +15,8 @@ export function Checkbox({ label, className, ...props }: CheckboxProps) {
         className={cn(
           'flex h-5 w-5 items-center justify-center rounded border border-[var(--void-border)] bg-(--void-bg-subtle)',
           'transition-colors hover:border-[var(--void-border-hover)]',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--void-accent)]',
-          'data-[checked]:border-[var(--void-accent)] data-[checked]:bg-[var(--void-accent)]',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--void-primary)]',
+          'data-[checked]:border-[var(--void-primary)] data-[checked]:bg-[var(--void-primary)]',
           'disabled:cursor-not-allowed disabled:opacity-50',
           className
         )}

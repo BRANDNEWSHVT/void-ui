@@ -24,8 +24,8 @@ export function Radio({
       data-slot="radio"
       className={cn(
         'size-4 flex items-center justify-center rounded-full border border-(--void-border) bg-(--void-bg-subtle)',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-(--void-accent)',
-        'data-checked:border-(--void-accent) data-checked:bg-(--void-accent)',
+        'focus:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary)',
+        'data-checked:border-(--void-primary) data-checked:bg-(--void-primary)',
         'transition-colors hover:border-(--void-border-hover)',
         'disabled:opacity-50 disabled:pointer-events-none',
         className

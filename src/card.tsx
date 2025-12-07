@@ -2,12 +2,23 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from './utils';
 
 export const cardVariants = cva(
-  'text-(--void-text) rounded-xl border border-(--void-border)',
+  [
+    'relative text-(--void-text) rounded-xl',
+    'border border-(--void-border)',
+    'transition-all duration-200',
+  ],
   {
     variants: {
       variant: {
-        default: 'bg-(--void-surface)',
-        ghost: 'bg-transparent',
+        default: 'bg-(--void-surface) shadow-[var(--void-shadow-md)]',
+        elevated: 'bg-(--void-surface) shadow-[var(--void-shadow-lg)]',
+        glass: [
+          'bg-[var(--void-glass)] backdrop-blur-xl',
+          'border-[var(--void-glass-border)]',
+          'shadow-[var(--void-shadow-lg)]',
+        ],
+        ghost: 'bg-transparent border-transparent',
+        outline: 'bg-transparent',
       },
     },
     defaultVariants: { variant: 'default' },

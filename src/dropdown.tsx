@@ -40,7 +40,7 @@ export function DropdownContent({
 const dropdownItemClasses = [
   'flex items-center gap-3 py-2 px-3 rounded-lg cursor-pointer select-none',
   'font-mono text-sm text-(--void-text) outline-none transition-colors',
-  'data-highlighted:bg-(--void-bg-muted) data-highlighted:text-(--void-accent)',
+  'data-highlighted:bg-(--void-bg-muted) data-highlighted:text-(--void-primary)',
   '*:[svg]:size-4 *:[svg]:text-(--void-muted)',
 ];
 
@@ -113,7 +113,7 @@ export function DropdownCheckboxItem({
           strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="text-(--void-accent)"
+          className="text-(--void-primary)"
         >
           <path d="M20 6 9 17l-5-5" />
         </svg>
@@ -146,7 +146,7 @@ export function DropdownRadioItem({
           height="8"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="text-(--void-accent)"
+          className="text-(--void-primary)"
         >
           <circle cx="12" cy="12" r="10" />
         </svg>

@@ -4,9 +4,24 @@ import { cn } from './utils';
 export interface ProgressProps
   extends React.ComponentProps<typeof BaseProgress.Root> {
   label?: string;
+  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'info';
 }
 
-export function Progress({ label, value, className, ...props }: ProgressProps) {
+const variantStyles = {
+  primary: 'bg-[var(--void-primary)] shadow-[0_0_10px_var(--void-primary)]',
+  success: 'bg-[var(--void-success)] shadow-[0_0_10px_var(--void-success)]',
+  warning: 'bg-[var(--void-warning)] shadow-[0_0_10px_var(--void-warning)]',
+  danger: 'bg-[var(--void-danger)] shadow-[0_0_10px_var(--void-danger)]',
+  info: 'bg-[var(--void-info)] shadow-[0_0_10px_var(--void-info)]',
+};
+
+export function Progress({
+  label,
+  value,
+  variant = 'primary',
+  className,
+  ...props
+}: ProgressProps) {
   return (
     <BaseProgress.Root
       data-slot="progress"
@@ -23,7 +38,7 @@ export function Progress({ label, value, className, ...props }: ProgressProps) {
       <BaseProgress.Track className="h-2 overflow-hidden rounded-full bg-(--void-bg-muted)">
         <BaseProgress.Indicator
           data-slot="progress-indicator"
-          className="h-full bg-(--void-accent) shadow-[0_0_10px_var(--void-accent)] transition-[width]"
+          className={cn('h-full transition-[width]', variantStyles[variant])}
         />
       </BaseProgress.Track>
     </BaseProgress.Root>

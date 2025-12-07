@@ -9,7 +9,7 @@ export const itemVariants = cva(
         default: 'bg-(--void-surface) border border-(--void-border)',
         outline: 'border border-(--void-border)',
         ghost: 'bg-transparent',
-        primary: 'bg-(--void-accent)/10 border border-(--void-accent)/20',
+        primary: 'bg-(--void-primary)/10 border border-(--void-primary)/20',
         danger: 'bg-red-500/10 border border-red-500/20',
         success: 'bg-emerald-500/10 border border-emerald-500/20',
         warning: 'bg-amber-500/10 border border-amber-500/20',

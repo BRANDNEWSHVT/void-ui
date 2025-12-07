@@ -1,4 +1,5 @@
 import { Select as BaseSelect } from '@base-ui-components/react/select';
+import { CaretDown, Check } from '@phosphor-icons/react';
 import { cn } from './utils';
 
 export type SelectOption = {
@@ -20,9 +21,9 @@ export function Select({
   ...props
 }: SelectProps) {
   return (
-    <div>
+    <div className="space-y-1.5">
       {label && (
-        <label className="mb-2 block font-mono text-xs uppercase tracking-wider text-(--void-muted)">
+        <label className="block text-sm font-medium text-(--void-text)">
           {label}
         </label>
       )}
@@ -39,10 +40,13 @@ function SelectTrigger({ placeholder }: { placeholder: string }) {
     <BaseSelect.Trigger
       data-slot="select-trigger"
       className={cn(
-        'flex w-full items-center justify-between rounded-lg border border-(--void-border) bg-(--void-bg-subtle) px-4 py-3',
-        'font-mono text-sm text-(--void-text) transition-colors',
-        'hover:border-(--void-border-hover) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-accent)',
-        'data-[popup-open]:border-(--void-accent)'
+        'flex h-10 w-full items-center justify-between rounded-lg px-3 py-2',
+        'bg-(--void-surface) text-sm text-(--void-text)',
+        'border border-(--void-border) shadow-[var(--void-shadow-sm)]',
+        'transition-all duration-200',
+        'hover:border-(--void-border-hover)',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-primary)/20 focus-visible:border-(--void-primary)',
+        'data-popup-open:border-(--void-primary) data-popup-open:ring-2 data-popup-open:ring-(--void-primary)/20'
       )}
     >
       <BaseSelect.Value>
@@ -51,15 +55,7 @@ function SelectTrigger({ placeholder }: { placeholder: string }) {
         }
       </BaseSelect.Value>
       <BaseSelect.Icon className="text-(--void-muted)">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <path
-            d="M3 4.5L6 7.5L9 4.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <CaretDown size={14} weight="bold" />
       </BaseSelect.Icon>
     </BaseSelect.Trigger>
   );
@@ -72,10 +68,12 @@ function SelectContent({ options }: { options: SelectOption[] }) {
         <BaseSelect.Popup
           data-slot="select-content"
           className={cn(
-            'origin-[var(--transform-origin)] rounded-lg border border-(--void-border) bg-(--void-surface) p-1',
-            'shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl',
-            'transition-[transform,opacity] data-[ending-style]:scale-95 data-[ending-style]:opacity-0',
-            'data-[starting-style]:scale-95 data-[starting-style]:opacity-0'
+            'origin-(--transform-origin) rounded-lg p-1',
+            'bg-(--void-surface) border border-(--void-border)',
+            'shadow-[var(--void-shadow-lg)]',
+            'transition-all duration-200',
+            'data-ending-style:scale-95 data-ending-style:opacity-0',
+            'data-starting-style:scale-95 data-starting-style:opacity-0'
           )}
         >
           {options.map((option) => (
@@ -83,21 +81,15 @@ function SelectContent({ options }: { options: SelectOption[] }) {
               key={option.value}
               value={option.value}
               className={cn(
-                'flex cursor-pointer items-center rounded-md px-3 py-2 font-mono text-sm text-(--void-text) outline-none',
-                'transition-colors data-[highlighted]:bg-(--void-bg-muted) data-[highlighted]:text-(--void-accent)'
+                'relative flex cursor-pointer select-none items-center rounded-md px-2 py-1.5',
+                'text-sm text-(--void-text) outline-none',
+                'transition-colors duration-150',
+                'data-highlighted:bg-(--void-bg-muted) data-highlighted:text-(--void-text)'
               )}
             >
               <BaseSelect.ItemText>{option.label}</BaseSelect.ItemText>
-              <BaseSelect.ItemIndicator className="ml-auto text-(--void-accent)">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path
-                    d="M10 3L4.5 8.5L2 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <BaseSelect.ItemIndicator className="ml-auto text-(--void-primary)">
+                <Check size={14} weight="bold" />
               </BaseSelect.ItemIndicator>
             </BaseSelect.Item>
           ))}

@@ -17,7 +17,7 @@ export function CollapsibleTrigger({
       data-slot="collapsible-trigger"
       className={cn(
         'flex w-full items-center justify-between py-2 font-mono text-sm text-(--void-text)',
-        'transition-colors hover:text-(--void-accent)',
+        'transition-colors hover:text-(--void-primary)',
         className
       )}
       {...props}
