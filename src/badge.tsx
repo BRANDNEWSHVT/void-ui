@@ -6,11 +6,11 @@ export const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-white/10 text-(--void-text)',
+        default: 'bg-(--void-bg-muted) text-(--void-text)',
         primary: 'bg-(--void-accent) text-white',
         'primary-subtle': 'bg-(--void-accent)/15 text-(--void-accent)',
         'primary-outline': 'border border-(--void-accent) text-(--void-accent)',
-        secondary: 'bg-white/10 text-(--void-text)',
+        secondary: 'bg-(--void-bg-muted) text-(--void-text)',
         'secondary-outline': 'border border-(--void-border) text-(--void-text)',
         success: 'bg-emerald-500 text-white',
         'success-subtle': 'bg-emerald-500/15 text-emerald-400',

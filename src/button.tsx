@@ -17,8 +17,8 @@ export const buttonVariants = cva(
           'disabled:hover:shadow-none',
         ],
         secondary: [
-          'border border-[var(--void-border)] bg-white/5 text-[var(--void-text)] backdrop-blur',
-          'hover:border-[var(--void-border-hover)] hover:bg-white/10',
+          'border border-[var(--void-border)] bg-(--void-bg-subtle) text-[var(--void-text)] backdrop-blur',
+          'hover:border-[var(--void-border-hover)] hover:bg-(--void-bg-muted)',
         ],
         ghost: ['text-[var(--void-text)]', 'hover:text-[var(--void-accent)]'],
         danger: [

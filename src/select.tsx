@@ -39,7 +39,7 @@ function SelectTrigger({ placeholder }: { placeholder: string }) {
     <BaseSelect.Trigger
       data-slot="select-trigger"
       className={cn(
-        'flex w-full items-center justify-between rounded-lg border border-(--void-border) bg-white/5 px-4 py-3',
+        'flex w-full items-center justify-between rounded-lg border border-(--void-border) bg-(--void-bg-subtle) px-4 py-3',
         'font-mono text-sm text-(--void-text) transition-colors',
         'hover:border-(--void-border-hover) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--void-accent)',
         'data-[popup-open]:border-(--void-accent)'
@@ -84,7 +84,7 @@ function SelectContent({ options }: { options: SelectOption[] }) {
               value={option.value}
               className={cn(
                 'flex cursor-pointer items-center rounded-md px-3 py-2 font-mono text-sm text-(--void-text) outline-none',
-                'transition-colors data-[highlighted]:bg-white/10 data-[highlighted]:text-(--void-accent)'
+                'transition-colors data-[highlighted]:bg-(--void-bg-muted) data-[highlighted]:text-(--void-accent)'
               )}
             >
               <BaseSelect.ItemText>{option.label}</BaseSelect.ItemText>

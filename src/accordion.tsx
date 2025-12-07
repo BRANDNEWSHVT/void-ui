@@ -22,7 +22,7 @@ export function AccordionItem({
     <BaseAccordion.Item
       data-slot="accordion-item"
       className={cn(
-        'rounded-xl border border-(--void-border) bg-white/5',
+        'rounded-xl border border-(--void-border) bg-(--void-bg-subtle)',
         className
       )}
       {...props}
@@ -42,7 +42,7 @@ export function AccordionTrigger({
         className={cn(
           'flex w-full items-center justify-between px-4 py-3',
           'font-mono text-sm text-(--void-text) transition-colors',
-          'hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--void-accent)',
+          'hover:bg-(--void-bg-subtle) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--void-accent)',
           'data-panel-open:text-(--void-accent)',
           className
         )}

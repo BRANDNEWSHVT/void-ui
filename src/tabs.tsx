@@ -22,7 +22,7 @@ export function TabsList({
     <BaseTabs.List
       data-slot="tabs-list"
       className={cn(
-        'flex gap-1 rounded-full border border-(--void-border) bg-white/5 p-1',
+        'flex gap-1 rounded-full border border-(--void-border) bg-(--void-bg-subtle) p-1',
         className
       )}
       {...props}

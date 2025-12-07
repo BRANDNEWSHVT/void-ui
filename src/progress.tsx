@@ -20,7 +20,7 @@ export function Progress({ label, value, className, ...props }: ProgressProps) {
           <span>{Math.round(value ?? 0)}%</span>
         </div>
       )}
-      <BaseProgress.Track className="h-2 overflow-hidden rounded-full bg-white/10">
+      <BaseProgress.Track className="h-2 overflow-hidden rounded-full bg-(--void-bg-muted)">
         <BaseProgress.Indicator
           data-slot="progress-indicator"
           className="h-full bg-(--void-accent) shadow-[0_0_10px_var(--void-accent)] transition-[width]"

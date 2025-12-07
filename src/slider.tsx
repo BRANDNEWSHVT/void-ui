@@ -19,7 +19,7 @@ export function Slider({ label, className, ...props }: SliderProps) {
         </div>
       )}
       <BaseSlider.Control className="flex items-center">
-        <BaseSlider.Track className="h-2 w-full rounded-full bg-white/10">
+        <BaseSlider.Track className="h-2 w-full rounded-full bg-(--void-bg-muted)">
           <BaseSlider.Indicator
             data-slot="slider-indicator"
             className="h-full rounded-full bg-(--void-accent) shadow-[0_0_10px_var(--void-accent)]"

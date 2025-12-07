@@ -10,6 +10,9 @@
   --void-accent: #ff2a00;
   --void-accent-hover: #ff4d26;
   --void-accent-alt: #ff6b00;
+  --void-bg-subtle: rgba(255, 255, 255, 0.05);
+  --void-bg-muted: rgba(255, 255, 255, 0.1);
+  --void-bg-emphasis: rgba(255, 255, 255, 0.15);
 }
 
 /* Light theme */
@@ -23,6 +26,9 @@
   --void-accent: #ff2a00;
   --void-accent-hover: #e62600;
   --void-accent-alt: #ff6b00;
+  --void-bg-subtle: rgba(0, 0, 0, 0.03);
+  --void-bg-muted: rgba(0, 0, 0, 0.06);
+  --void-bg-emphasis: rgba(0, 0, 0, 0.1);
 }
 
 /* Animations */

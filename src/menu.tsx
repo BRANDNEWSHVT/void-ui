@@ -21,9 +21,9 @@ export function MenuTrigger({
     <BaseMenu.Trigger
       data-slot="menu-trigger"
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-full border border-(--void-border) bg-white/5 px-4 py-2',
+        'inline-flex items-center justify-center gap-2 rounded-full border border-(--void-border) bg-(--void-bg-subtle) px-4 py-2',
         'font-mono text-sm text-(--void-text) transition-colors',
-        'hover:border-(--void-border-hover) hover:bg-white/10 data-[popup-open]:border-(--void-accent)',
+        'hover:border-(--void-border-hover) hover:bg-(--void-bg-muted) data-[popup-open]:border-(--void-accent)',
         className
       )}
       {...props}
@@ -81,7 +81,7 @@ export function MenuItem({
       className={cn(
         'flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2',
         'font-mono text-sm text-(--void-text) outline-none transition-colors',
-        'data-[highlighted]:bg-white/10 data-[highlighted]:text-(--void-accent)',
+        'data-[highlighted]:bg-(--void-bg-muted) data-[highlighted]:text-(--void-accent)',
         className
       )}
       {...props}

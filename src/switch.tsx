@@ -12,7 +12,7 @@ export function Switch({ label, className, ...props }: SwitchProps) {
       <BaseSwitch.Root
         data-slot="switch"
         className={cn(
-          'relative h-6 w-11 rounded-full border border-[var(--void-border)] bg-white/5',
+          'relative h-6 w-11 rounded-full border border-[var(--void-border)] bg-(--void-bg-subtle)',
           'transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--void-accent)]',
           'data-[checked]:border-[var(--void-accent)] data-[checked]:bg-[var(--void-accent)]',
           'disabled:cursor-not-allowed disabled:opacity-50',

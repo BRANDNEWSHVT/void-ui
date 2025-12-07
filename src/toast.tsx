@@ -65,7 +65,7 @@ export function Toast({
           </BaseToast.Description>
         )}
       </div>
-      <BaseToast.Close className="rounded-full p-1 text-(--void-muted) transition-colors hover:bg-white/10 hover:text-(--void-text)">
+      <BaseToast.Close className="rounded-full p-1 text-(--void-muted) transition-colors hover:bg-(--void-bg-muted) hover:text-(--void-text)">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
           <path
             d="M9 3L3 9M3 3L9 9"

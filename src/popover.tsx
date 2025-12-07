@@ -13,9 +13,9 @@ export function PopoverTrigger({
     <BasePopover.Trigger
       data-slot="popover-trigger"
       className={cn(
-        'inline-flex items-center justify-center rounded-full border border-(--void-border) bg-white/5 px-4 py-2',
+        'inline-flex items-center justify-center rounded-full border border-(--void-border) bg-(--void-bg-subtle) px-4 py-2',
         'font-mono text-sm text-(--void-text) transition-colors',
-        'hover:border-(--void-border-hover) hover:bg-white/10',
+        'hover:border-(--void-border-hover) hover:bg-(--void-bg-muted)',
         className
       )}
       {...props}
@@ -63,7 +63,7 @@ export function PopoverClose({
       data-slot="popover-close"
       className={cn(
         'rounded-full p-1 text-(--void-muted) transition-colors',
-        'hover:bg-white/10 hover:text-(--void-text)',
+        'hover:bg-(--void-bg-muted) hover:text-(--void-text)',
         className
       )}
       {...props}

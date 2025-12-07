@@ -78,7 +78,7 @@ export function CardFooter({
     <div
       data-slot="card-footer"
       className={cn(
-        'flex items-center gap-2 p-6 bg-white/5 border-t border-(--void-border) rounded-b-xl',
+        'flex items-center gap-2 p-6 bg-(--void-bg-subtle) border-t border-(--void-border) rounded-b-xl',
         className
       )}
       {...props}

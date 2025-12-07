@@ -23,7 +23,7 @@ export function Radio({
     <BaseRadio.Root
       data-slot="radio"
       className={cn(
-        'size-4 flex items-center justify-center rounded-full border border-(--void-border) bg-white/5',
+        'size-4 flex items-center justify-center rounded-full border border-(--void-border) bg-(--void-bg-subtle)',
         'focus:outline-none focus-visible:ring-2 focus-visible:ring-(--void-accent)',
         'data-checked:border-(--void-accent) data-checked:bg-(--void-accent)',
         'transition-colors hover:border-(--void-border-hover)',

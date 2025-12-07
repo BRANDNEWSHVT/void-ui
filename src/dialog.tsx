@@ -119,7 +119,7 @@ export function DialogClose({
       data-slot="dialog-close"
       className={cn(
         'rounded-full p-2 text-(--void-muted) transition-colors',
-        'hover:bg-white/10 hover:text-(--void-text)',
+        'hover:bg-(--void-bg-muted) hover:text-(--void-text)',
         className
       )}
       {...props}

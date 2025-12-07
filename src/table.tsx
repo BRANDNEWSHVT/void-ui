@@ -36,7 +36,7 @@ export function TableHeader({
   return (
     <thead
       data-slot="table-header"
-      className={cn('bg-white/5', className)}
+      className={cn('bg-(--void-bg-subtle)', className)}
       {...props}
     />
   );
@@ -72,7 +72,7 @@ export function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
   return (
     <tr
       data-slot="table-row"
-      className={cn('transition-colors hover:bg-white/5', className)}
+      className={cn('transition-colors hover:bg-(--void-bg-subtle)', className)}
       {...props}
     />
   );
@@ -95,7 +95,7 @@ export function TableFooter({
   return (
     <tfoot
       data-slot="table-footer"
-      className={cn('text-xs text-(--void-muted) bg-white/5', className)}
+      className={cn('text-xs text-(--void-muted) bg-(--void-bg-subtle)', className)}
       {...props}
     />
   );

@@ -10,7 +10,7 @@ export const alertVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-white/5 text-(--void-text) border border-(--void-border)',
+        default: 'bg-(--void-bg-subtle) text-(--void-text) border border-(--void-border)',
         danger:
           'bg-(--void-accent)/10 text-(--void-accent) border border-(--void-accent)/30',
         success:

@@ -41,7 +41,7 @@ export function Code({ className, ...props }: React.ComponentProps<'code'>) {
     <code
       data-slot="text-code"
       className={cn(
-        'font-mono text-sm text-(--void-accent) bg-white/5 px-1.5 py-0.5 rounded',
+        'font-mono text-sm text-(--void-accent) bg-(--void-bg-subtle) px-1.5 py-0.5 rounded',
         className
       )}
       {...props}

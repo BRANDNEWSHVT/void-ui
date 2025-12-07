@@ -40,7 +40,7 @@ export function DropdownContent({
 const dropdownItemClasses = [
   'flex items-center gap-3 py-2 px-3 rounded-lg cursor-pointer select-none',
   'font-mono text-sm text-(--void-text) outline-none transition-colors',
-  'data-highlighted:bg-white/10 data-highlighted:text-(--void-accent)',
+  'data-highlighted:bg-(--void-bg-muted) data-highlighted:text-(--void-accent)',
   '*:[svg]:size-4 *:[svg]:text-(--void-muted)',
 ];
 
