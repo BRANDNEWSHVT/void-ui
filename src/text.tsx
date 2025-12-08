@@ -1,10 +1,55 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from './utils';
 
-export function Text({ className, ...props }: React.ComponentProps<'p'>) {
+export const textVariants = cva('leading-relaxed', {
+  variants: {
+    size: {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-base',
+      lg: 'text-lg',
+      xl: 'text-xl',
+    },
+    variant: {
+      default: 'text-(--void-text)',
+      muted: 'text-(--void-muted)',
+      primary: 'text-(--void-primary)',
+      success: 'text-(--void-success)',
+      warning: 'text-(--void-warning)',
+      danger: 'text-(--void-danger)',
+    },
+    weight: {
+      normal: 'font-normal',
+      medium: 'font-medium',
+      semibold: 'font-semibold',
+      bold: 'font-bold',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+    variant: 'default',
+    weight: 'normal',
+  },
+});
+
+export interface TextProps
+  extends React.ComponentProps<'p'>,
+    VariantProps<typeof textVariants> {
+  as?: 'p' | 'span' | 'div';
+}
+
+export function Text({
+  as: Component = 'p',
+  size,
+  variant,
+  weight,
+  className,
+  ...props
+}: TextProps) {
   return (
-    <p
+    <Component
       data-slot="text"
-      className={cn('text-base text-(--void-text) leading-relaxed', className)}
+      className={cn(textVariants({ size, variant, weight }), className)}
       {...props}
     />
   );
@@ -15,7 +60,9 @@ export function TextLink({ className, ...props }: React.ComponentProps<'a'>) {
     <a
       data-slot="text-link"
       className={cn(
-        'text-(--void-text) underline underline-offset-2 hover:text-(--void-primary) transition-colors',
+        'text-(--void-primary) underline underline-offset-4',
+        'decoration-(--void-primary)/30 hover:decoration-(--void-primary)',
+        'transition-colors duration-150',
         className
       )}
       {...props}
@@ -41,7 +88,9 @@ export function Code({ className, ...props }: React.ComponentProps<'code'>) {
     <code
       data-slot="text-code"
       className={cn(
-        'font-mono text-sm text-(--void-primary) bg-(--void-bg-subtle) px-1.5 py-0.5 rounded',
+        'relative rounded-md px-[0.4em] py-[0.2em]',
+        'bg-(--void-bg-muted) text-(--void-primary)',
+        'font-mono text-[0.9em] font-medium',
         className
       )}
       {...props}

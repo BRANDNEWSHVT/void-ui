@@ -61,8 +61,13 @@ export {
   TooltipProvider,
   Tooltip,
   TooltipTrigger,
+  TooltipPortal,
+  TooltipPositioner,
+  TooltipPopup,
+  TooltipArrow,
   TooltipContent,
 } from './tooltip'
+export type { TooltipContentProps } from './tooltip'
 
 // Menu
 export {
@@ -95,14 +100,17 @@ export {
 // Toast
 export {
   ToastProvider,
+  ToastPortal,
   ToastViewport,
-  Toast,
   ToastRoot,
+  ToastContent,
   ToastTitle,
   ToastDescription,
+  ToastAction,
   ToastClose,
+  toastManager,
+  useToastManager,
 } from './toast'
-export type { ToastRootProps } from './toast'
 
 // Progress
 export { Progress, ProgressLabel, progressVariants } from './progress'
@@ -263,10 +271,12 @@ export {
 } from './table'
 
 // Text
-export { Text, TextLink, Strong, Code } from './text'
+export { Text, TextLink, Strong, Code, textVariants } from './text'
+export type { TextProps } from './text'
 
 // Textarea
 export { Textarea, textareaVariants } from './textarea'
+export type { TextareaProps } from './textarea'
 
 // Icons (re-export from Phosphor)
 export * from './icons'
