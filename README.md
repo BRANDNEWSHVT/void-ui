@@ -1,6 +1,6 @@
 # Void UI
 
-A dark-first, composable React component library built on [Base UI](https://base-ui.com) and [Tailwind CSS v4](https://tailwindcss.com).
+Another composable React component library built on [Base UI](https://base-ui.com) and [Tailwind CSS v4](https://tailwindcss.com).
 
 > **Note:** This is an experimental personal project. APIs may change without notice.
 
@@ -27,10 +27,14 @@ pnpm add @radenadri/void-ui
 @source "../node_modules/@radenadri/void-ui/dist";
 ```
 
-### 2. Add Dark Class
+### 2. Enable Dark Mode (Optional)
+
+Void UI uses light theme by default. To enable dark mode:
 
 ```html
 <html class="dark">
+<!-- or -->
+<html data-theme="dark">
 ```
 
 ## Usage

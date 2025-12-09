@@ -1,0 +1,634 @@
+# Void UI
+
+> A light-first, composable React component library built on Base UI and Tailwind CSS v4.
+
+Void UI is an experimental personal React component library that provides 40+ accessible, customizable components. It uses CSS custom properties for theming and integrates Phosphor Icons.
+
+## Quick Start
+
+```bash
+pnpm add @radenadri/void-ui
+```
+
+### Setup
+
+1. Import styles in your CSS:
+```css
+@import "tailwindcss";
+@import "@radenadri/void-ui/styles.css";
+@source "../node_modules/@radenadri/void-ui/dist";
+```
+
+2. Enable dark mode (optional):
+```html
+<html class="dark">
+<!-- or -->
+<html data-theme="dark">
+```
+
+3. Wrap app with ToastProvider (if using toasts):
+```tsx
+import { ToastProvider } from '@radenadri/void-ui'
+
+function App() {
+  return (
+    <ToastProvider>
+      {/* Your app */}
+    </ToastProvider>
+  )
+}
+```
+
+## Design Tokens
+
+Override CSS variables to customize theming:
+
+```css
+:root {
+  /* Primary */
+  --void-primary: #0891b2;
+  --void-secondary: #e4e4e7;
+  
+  /* Status */
+  --void-success: #059669;
+  --void-warning: #d97706;
+  --void-danger: #e11d48;
+  --void-info: #0284c7;
+  
+  /* Surfaces (light theme default) */
+  --void-bg: #fafafa;
+  --void-surface: #ffffff;
+  --void-bg-subtle: rgba(0, 0, 0, 0.02);
+  --void-bg-muted: rgba(0, 0, 0, 0.04);
+  
+  /* Borders */
+  --void-border: rgba(0, 0, 0, 0.08);
+  --void-border-hover: rgba(0, 0, 0, 0.15);
+  
+  /* Text */
+  --void-text: #09090b;
+  --void-muted: #71717a;
+  
+  /* Shadows */
+  --void-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --void-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+  --void-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode */
+[data-theme="dark"], .dark {
+  --void-bg: #09090b;
+  --void-surface: #18181b;
+  --void-text: #fafafa;
+  --void-muted: #a1a1aa;
+  --void-border: rgba(255, 255, 255, 0.08);
+}
+```
+
+## Components
+
+### Layout
+
+#### Stack
+Flexbox layout with spacing control.
+```tsx
+import { Stack } from '@radenadri/void-ui'
+
+<Stack direction="row" spacing="md" align="center">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</Stack>
+```
+Props: `direction` ("row" | "column"), `spacing` ("xs" | "sm" | "md" | "lg" | "xl"), `align`, `justify`, `wrap`
+
+#### Separator
+Horizontal or vertical divider.
+```tsx
+import { Separator } from '@radenadri/void-ui'
+
+<Separator orientation="horizontal" />
+```
+
+#### Divider
+Visual divider with optional label.
+```tsx
+import { Divider } from '@radenadri/void-ui'
+
+<Divider label="OR" />
+```
+
+### Forms
+
+#### Button
+Interactive button with variants and sizes.
+```tsx
+import { Button } from '@radenadri/void-ui'
+
+<Button variant="primary" size="md">Click me</Button>
+<Button variant="danger" size="sm"><Trash size={16} /> Delete</Button>
+<Button size="icon"><Gear size={18} /></Button>
+```
+Props:
+- `variant`: "primary" | "secondary" | "default" | "success" | "warning" | "danger" | "ghost" | "outline" | "outline-secondary" | "outline-danger"
+- `size`: "xs" | "sm" | "md" | "lg" | "icon" | "icon-sm" | "icon-lg"
+- `disabled`: boolean
+
+#### Input
+Text input field.
+```tsx
+import { Input } from '@radenadri/void-ui'
+
+<Input placeholder="Enter text..." size="md" />
+<Input type="email" disabled />
+```
+Props: `size` ("sm" | "md" | "lg"), `disabled`, standard input attributes
+
+#### Textarea
+Multi-line text input.
+```tsx
+import { Textarea } from '@radenadri/void-ui'
+
+<Textarea placeholder="Enter description..." rows={4} />
+```
+
+#### Checkbox
+Checkbox with optional group support.
+```tsx
+import { Checkbox } from '@radenadri/void-ui'
+
+<Checkbox label="Accept terms" />
+<Checkbox label="Subscribe" description="Get weekly updates" defaultChecked />
+```
+Props: `label`, `description`, `checked`, `defaultChecked`, `onCheckedChange`, `disabled`
+
+#### Switch
+Toggle switch with label.
+```tsx
+import { Switch } from '@radenadri/void-ui'
+
+<Switch label="Dark mode" description="Enable dark theme" />
+```
+Props: `label`, `description`, `checked`, `defaultChecked`, `onCheckedChange`, `disabled`
+
+#### Radio
+Radio button group.
+```tsx
+import { Radio, RadioGroup, RadioItem } from '@radenadri/void-ui'
+
+<RadioGroup defaultValue="option1">
+  <RadioItem value="option1" label="Option 1" />
+  <RadioItem value="option2" label="Option 2" />
+</RadioGroup>
+```
+
+#### Select
+Composable dropdown select.
+```tsx
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectGroupLabel, SelectSeparator } from '@radenadri/void-ui'
+
+<Select defaultValue="apple">
+  <SelectTrigger placeholder="Select fruit..." />
+  <SelectContent>
+    <SelectItem value="apple">Apple</SelectItem>
+    <SelectItem value="banana">Banana</SelectItem>
+  </SelectContent>
+</Select>
+```
+Props (SelectContent): `side` ("top" | "bottom" | "left" | "right"), `align` ("start" | "center" | "end")
+
+#### Slider
+Range slider with value display.
+```tsx
+import { Slider } from '@radenadri/void-ui'
+
+<Slider defaultValue={50} min={0} max={100} step={1} showValue />
+```
+
+#### Field
+Form field wrapper with label, description, and error.
+```tsx
+import { FieldRoot, FieldLabel, FieldDescription, FieldError, Input } from '@radenadri/void-ui'
+
+<FieldRoot>
+  <FieldLabel>Email</FieldLabel>
+  <FieldDescription>We'll never share your email.</FieldDescription>
+  <Input type="email" />
+  <FieldError>Invalid email address</FieldError>
+</FieldRoot>
+```
+
+#### Fieldset
+Group of related fields.
+```tsx
+import { Fieldset, FieldsetLegend } from '@radenadri/void-ui'
+
+<Fieldset>
+  <FieldsetLegend>Personal Information</FieldsetLegend>
+  {/* Fields here */}
+</Fieldset>
+```
+
+#### NumberField
+Numeric input with increment/decrement.
+```tsx
+import { NumberField } from '@radenadri/void-ui'
+
+<NumberField defaultValue={5} min={0} max={10} />
+```
+
+### Display
+
+#### Alert
+Contextual feedback messages.
+```tsx
+import { Alert, AlertTitle, AlertDescription } from '@radenadri/void-ui'
+
+<Alert variant="success">
+  <AlertTitle>Success!</AlertTitle>
+  <AlertDescription>Your changes have been saved.</AlertDescription>
+</Alert>
+```
+Props: `variant` ("default" | "success" | "warning" | "danger" | "info")
+
+#### Avatar
+User avatar with fallback.
+```tsx
+import { Avatar } from '@radenadri/void-ui'
+
+<Avatar src="https://example.com/avatar.jpg" name="John Doe" size="md" />
+<Avatar name="Jane Smith" /> {/* Shows initials "JS" */}
+<Avatar fallback="?" />
+```
+Props: `src`, `name` (generates initials), `fallback`, `size` ("xs" | "sm" | "md" | "lg" | "xl")
+
+#### Badge
+Status indicators.
+```tsx
+import { Badge } from '@radenadri/void-ui'
+
+<Badge variant="success">Active</Badge>
+<Badge variant="warning" size="sm">Pending</Badge>
+```
+Props: `variant` ("default" | "primary" | "secondary" | "success" | "warning" | "danger"), `size` ("sm" | "md" | "lg")
+
+#### Chip
+Removable tag/chip.
+```tsx
+import { Chip } from '@radenadri/void-ui'
+
+<Chip onRemove={() => console.log('removed')}>React</Chip>
+```
+
+#### Card
+Content container.
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardBody, CardFooter, Button } from '@radenadri/void-ui'
+
+<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+  </CardHeader>
+  <CardBody>
+    <p>Card content here</p>
+  </CardBody>
+  <CardFooter>
+    <Button>Action</Button>
+  </CardFooter>
+</Card>
+```
+
+#### Spinner
+Loading indicator.
+```tsx
+import { Spinner } from '@radenadri/void-ui'
+
+<Spinner size="md" />
+```
+Props: `size` ("sm" | "md" | "lg")
+
+#### Progress
+Progress bar.
+```tsx
+import { Progress } from '@radenadri/void-ui'
+
+<Progress value={75} max={100} variant="primary" />
+```
+Props: `value`, `max`, `variant` ("primary" | "success" | "warning" | "danger")
+
+#### Table
+Data table components.
+```tsx
+import { TableContainer, Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@radenadri/void-ui'
+
+<TableContainer>
+  <Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead>Name</TableHead>
+        <TableHead>Email</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>John</TableCell>
+        <TableCell>john@example.com</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
+```
+
+#### Text
+Typography component.
+```tsx
+import { Text } from '@radenadri/void-ui'
+
+<Text variant="muted" size="sm">Secondary text</Text>
+```
+Props: `variant` ("default" | "muted"), `size` ("xs" | "sm" | "md" | "lg" | "xl")
+
+#### Heading
+Semantic headings.
+```tsx
+import { Heading } from '@radenadri/void-ui'
+
+<Heading as="h1" size="3xl">Page Title</Heading>
+<Heading as="h2" size="xl">Section Title</Heading>
+```
+Props: `as` ("h1" | "h2" | "h3" | "h4" | "h5" | "h6"), `size` ("xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl")
+
+#### Kbd
+Keyboard shortcut display.
+```tsx
+import { Kbd } from '@radenadri/void-ui'
+
+<Kbd>⌘</Kbd> + <Kbd>K</Kbd>
+```
+
+#### IconBox
+Icon container with background.
+```tsx
+import { IconBox, Bell } from '@radenadri/void-ui'
+
+<IconBox variant="primary" size="md">
+  <Bell size={20} />
+</IconBox>
+```
+
+### Navigation
+
+#### Tabs
+Tab panels.
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@radenadri/void-ui'
+
+<Tabs defaultValue="tab1">
+  <TabsList>
+    <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+    <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1">Content 1</TabsContent>
+  <TabsContent value="tab2">Content 2</TabsContent>
+</Tabs>
+```
+
+#### Accordion
+Collapsible sections.
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@radenadri/void-ui'
+
+<Accordion>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Section 1</AccordionTrigger>
+    <AccordionContent>Content for section 1</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+Props (Accordion): `defaultValue`, `value`, `onValueChange`
+
+#### Pagination
+Page navigation.
+```tsx
+import { Pagination } from '@radenadri/void-ui'
+
+<Pagination currentPage={1} totalPages={10} onPageChange={(page) => console.log(page)} />
+```
+
+#### Menu
+Dropdown menu.
+```tsx
+import { Menu, MenuTrigger, MenuContent, MenuItem, MenuSeparator, MenuGroup, MenuGroupLabel, Button } from '@radenadri/void-ui'
+
+<Menu>
+  <MenuTrigger>
+    <Button>Options</Button>
+  </MenuTrigger>
+  <MenuContent>
+    <MenuItem shortcut="⌘N">New File</MenuItem>
+    <MenuItem shortcut="⌘O">Open</MenuItem>
+    <MenuSeparator />
+    <MenuItem className="text-(--void-danger)">Delete</MenuItem>
+  </MenuContent>
+</Menu>
+```
+Props (MenuItem): `shortcut`, `disabled`, `onClick`
+
+#### Dropdown
+Enhanced dropdown with checkbox items.
+```tsx
+import { Dropdown, DropdownTrigger, DropdownContent, DropdownCheckboxItem, Button } from '@radenadri/void-ui'
+
+<Dropdown>
+  <DropdownTrigger>
+    <Button>Filter</Button>
+  </DropdownTrigger>
+  <DropdownContent>
+    <DropdownCheckboxItem checked>Option 1</DropdownCheckboxItem>
+    <DropdownCheckboxItem>Option 2</DropdownCheckboxItem>
+  </DropdownContent>
+</Dropdown>
+```
+
+### Overlay
+
+#### Dialog
+Modal dialog.
+```tsx
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose, Button } from '@radenadri/void-ui'
+
+<Dialog>
+  <DialogTrigger>
+    <Button>Open Dialog</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogDescription>Dialog description here.</DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose>
+        <Button variant="ghost">Cancel</Button>
+      </DialogClose>
+      <Button>Confirm</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+Props (DialogContent): `showClose` (boolean, default true)
+
+#### AlertDialog
+Confirmation dialog.
+```tsx
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction, Button } from '@radenadri/void-ui'
+
+<AlertDialog>
+  <AlertDialogTrigger>
+    <Button variant="danger">Delete</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+      <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Delete</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+#### Popover
+Floating content panel.
+```tsx
+import { Popover, PopoverTrigger, PopoverContent, PopoverTitle, PopoverDescription, PopoverClose, Button } from '@radenadri/void-ui'
+
+<Popover>
+  <PopoverTrigger>
+    <Button>Open Popover</Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-72">
+    <PopoverClose />
+    <PopoverTitle>Popover Title</PopoverTitle>
+    <PopoverDescription>Popover content here.</PopoverDescription>
+  </PopoverContent>
+</Popover>
+```
+Props (PopoverContent): `side` ("top" | "bottom" | "left" | "right"), `align` ("start" | "center" | "end"), `showArrow`
+
+#### Tooltip
+Hover hints.
+```tsx
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent, Button } from '@radenadri/void-ui'
+
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger>
+      <Button size="icon"><Gear size={18} /></Button>
+    </TooltipTrigger>
+    <TooltipContent side="top">Settings</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+Props (TooltipProvider): `delayDuration`
+Props (TooltipContent): `side` ("top" | "bottom" | "left" | "right")
+
+#### Toast
+Notifications.
+```tsx
+import { ToastProvider, toastManager, useToastManager, Button } from '@radenadri/void-ui'
+
+// Wrap app with ToastProvider
+<ToastProvider position="bottom-right">
+  <App />
+</ToastProvider>
+
+// Use global toastManager (anywhere)
+toastManager.add({
+  title: 'Success',
+  description: 'Your changes have been saved.',
+  type: 'success', // 'success' | 'error' | 'warning' | 'info'
+})
+
+// Or use hook inside components
+function MyComponent() {
+  const toast = useToastManager()
+  
+  return (
+    <Button onClick={() => toast.add({ title: 'Hello!' })}>
+      Show Toast
+    </Button>
+  )
+}
+```
+Props (ToastProvider): `position` ("top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right")
+Toast options: `title`, `description`, `type`, `duration`
+
+#### Collapsible
+Expandable panel.
+```tsx
+import { Collapsible, CollapsibleTrigger, CollapsibleContent, Button } from '@radenadri/void-ui'
+
+<Collapsible>
+  <CollapsibleTrigger>
+    <Button variant="ghost">Toggle</Button>
+  </CollapsibleTrigger>
+  <CollapsibleContent>
+    Hidden content here
+  </CollapsibleContent>
+</Collapsible>
+```
+
+## Icons
+
+Void UI re-exports Phosphor Icons:
+
+```tsx
+import { Bell, Gear, User, Trash, Plus, Check, X, CaretDown, ArrowRight } from '@radenadri/void-ui'
+
+<Bell size={20} weight="duotone" />
+```
+
+Common icons: `Bell`, `Gear`, `User`, `Trash`, `Plus`, `Check`, `X`, `CaretDown`, `CaretUp`, `ArrowRight`, `ArrowLeft`, `MagnifyingGlass`, `Eye`, `EyeSlash`, `Copy`, `Download`, `Upload`, `Info`, `Warning`, `CheckCircle`, `XCircle`
+
+## Utilities
+
+### cn()
+Merge Tailwind classes with clsx and tailwind-merge:
+```tsx
+import { cn } from '@radenadri/void-ui'
+
+<div className={cn('base-class', isActive && 'active-class', className)} />
+```
+
+## Customization
+
+### Override CSS Variables
+```css
+:root {
+  --void-primary: #8b5cf6; /* Purple instead of cyan */
+}
+
+[data-theme="light"] {
+  --void-bg: #ffffff;
+  --void-surface: #f4f4f5;
+  --void-text: #18181b;
+}
+```
+
+### Component-Level Customization
+All components accept `className` prop:
+```tsx
+<Button className="bg-purple-500 hover:bg-purple-600">Custom</Button>
+<Card className="border-2 border-dashed">Custom Card</Card>
+```
+
+## Requirements
+
+- React 18+
+- Tailwind CSS 4+
+
+## License
+
+MIT
