@@ -1,6 +1,62 @@
+import * as React from 'react';
 import { Select as BaseSelect } from '@base-ui-components/react/select';
-import { CaretDown, Check } from '@phosphor-icons/react';
+import { CaretDownIcon, CheckIcon } from '@phosphor-icons/react';
 import { cn } from './utils';
+
+function isElementWithChildren(
+  node: React.ReactNode
+): node is React.ReactElement<{ children?: React.ReactNode }> {
+  return React.isValidElement(node);
+}
+
+function getTextFromNode(node: React.ReactNode): string | null {
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    const text = node
+      .map((child) => getTextFromNode(child))
+      .filter(Boolean)
+      .join('')
+      .trim();
+    return text || null;
+  }
+
+  if (isElementWithChildren(node)) {
+    return getTextFromNode(node.props.children);
+  }
+
+  return null;
+}
+
+function extractOptionLabels(
+  children: React.ReactNode
+): Record<string, string> {
+  const labels: Record<string, string> = {};
+
+  const visit = (node: React.ReactNode) => {
+    if (Array.isArray(node)) {
+      node.forEach(visit);
+      return;
+    }
+
+    if (isSelectItemElement(node) && node.props.value != null) {
+      const text =
+        node.props.textValue ??
+        getTextFromNode(node.props.children) ??
+        String(node.props.value);
+      labels[String(node.props.value)] = text;
+    }
+
+    if (isElementWithChildren(node)) {
+      visit(node.props.children);
+    }
+  };
+
+  visit(children);
+  return labels;
+}
 
 export type SelectOption = {
   value: string;
@@ -8,8 +64,70 @@ export type SelectOption = {
   disabled?: boolean;
 };
 
+export interface SelectItemProps
+  extends React.ComponentProps<typeof BaseSelect.Item> {
+  textValue?: string;
+}
+
+function isSelectItemElement(
+  node: React.ReactNode
+): node is React.ReactElement<SelectItemProps> {
+  return React.isValidElement(node) && node.type === SelectItem;
+}
+
+type SelectOptionRegistry = {
+  labels: Record<string, string>;
+  registerOption: (value: string, label: string) => void;
+  unregisterOption: (value: string) => void;
+};
+
+const SelectOptionContext = React.createContext<SelectOptionRegistry | null>(
+  null
+);
+
+function useSelectOptionContext() {
+  return React.useContext(SelectOptionContext);
+}
+
 export function Select(props: React.ComponentProps<typeof BaseSelect.Root>) {
-  return <BaseSelect.Root data-slot="select" {...props} />;
+  const staticLabels = React.useMemo(
+    () => extractOptionLabels(props.children),
+    [props.children]
+  );
+  const [labels, setLabels] =
+    React.useState<Record<string, string>>(staticLabels);
+
+  React.useEffect(() => {
+    setLabels(staticLabels);
+  }, [staticLabels]);
+
+  const registerOption = React.useCallback((value: string, label: string) => {
+    setLabels((prev) =>
+      prev[value] === label ? prev : { ...prev, [value]: label }
+    );
+  }, []);
+
+  const unregisterOption = React.useCallback((value: string) => {
+    setLabels((prev) => {
+      if (!(value in prev)) {
+        return prev;
+      }
+      const next = { ...prev };
+      delete next[value];
+      return next;
+    });
+  }, []);
+
+  const contextValue = React.useMemo(
+    () => ({ labels, registerOption, unregisterOption }),
+    [labels, registerOption, unregisterOption]
+  );
+
+  return (
+    <SelectOptionContext.Provider value={contextValue}>
+      <BaseSelect.Root data-slot="select" {...props} />
+    </SelectOptionContext.Provider>
+  );
 }
 
 export interface SelectTriggerProps
@@ -22,6 +140,7 @@ export function SelectTrigger({
   placeholder = 'Select...',
   ...props
 }: SelectTriggerProps) {
+  const optionContext = useSelectOptionContext();
   return (
     <BaseSelect.Trigger
       data-slot="select-trigger"
@@ -38,9 +157,18 @@ export function SelectTrigger({
       )}
       {...props}
     >
-      <BaseSelect.Value aria-placeholder={placeholder} />
+      <BaseSelect.Value aria-placeholder={placeholder}>
+        {(value: string | null) => {
+          if (!value) {
+            return <span className="text-(--void-muted)">{placeholder}</span>;
+          }
+
+          const label = optionContext?.labels?.[value];
+          return label ?? value;
+        }}
+      </BaseSelect.Value>
       <BaseSelect.Icon className="text-(--void-muted)">
-        <CaretDown size={14} />
+        <CaretDownIcon size={14} />
       </BaseSelect.Icon>
     </BaseSelect.Trigger>
   );
@@ -74,14 +202,39 @@ export function SelectContent({
   );
 }
 
+export interface SelectItemProps
+  extends React.ComponentProps<typeof BaseSelect.Item> {
+  textValue?: string;
+}
+
 export function SelectItem({
   className,
   children,
+  textValue,
+  value,
   ...props
-}: React.ComponentProps<typeof BaseSelect.Item>) {
+}: SelectItemProps) {
+  const optionContext = useSelectOptionContext();
+
+  React.useEffect(() => {
+    if (!optionContext || value == null) {
+      return;
+    }
+
+    const labelText =
+      textValue ?? (typeof children === 'string' ? children : String(value));
+
+    optionContext.registerOption(String(value), labelText);
+
+    return () => {
+      optionContext.unregisterOption(String(value));
+    };
+  }, [optionContext, value, textValue, children]);
+
   return (
     <BaseSelect.Item
       data-slot="select-item"
+      value={value}
       className={cn(
         'relative flex cursor-pointer select-none items-center rounded-md px-2.5 py-1.5 pr-8',
         'text-sm text-(--void-text) outline-none',
@@ -94,7 +247,7 @@ export function SelectItem({
     >
       <BaseSelect.ItemText>{children}</BaseSelect.ItemText>
       <BaseSelect.ItemIndicator className="absolute right-2 text-(--void-primary)">
-        <Check size={14} weight="bold" />
+        <CheckIcon size={14} weight="bold" />
       </BaseSelect.ItemIndicator>
     </BaseSelect.Item>
   );
