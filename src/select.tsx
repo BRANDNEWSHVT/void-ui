@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Select as BaseSelect } from '@base-ui-components/react/select';
+import { Select as BaseSelect } from '@base-ui/react/select';
 import { CaretDownIcon, CheckIcon } from '@phosphor-icons/react';
 import { cn } from './utils';
 

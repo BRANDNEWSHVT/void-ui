@@ -1,21 +1,64 @@
-import { Toast as BaseToast } from '@base-ui-components/react/toast';
+import * as React from 'react';
+import { Toast as BaseToast } from '@base-ui/react/toast';
 import { cn } from './utils';
 
-// Create a global toast manager for use outside React tree
-export const toastManager = BaseToast.createToastManager();
+// Lazy-initialized global toast manager for use outside React tree
+let _toastManager: ReturnType<typeof BaseToast.createToastManager> | null = null;
+
+function getToastManager() {
+  if (!_toastManager) {
+    _toastManager = BaseToast.createToastManager();
+  }
+  return _toastManager;
+}
+
+// Proxy object that lazily initializes the manager
+export const toastManager = {
+  add: (...args: Parameters<ReturnType<typeof BaseToast.createToastManager>['add']>) =>
+    getToastManager().add(...args),
+  close: (...args: Parameters<ReturnType<typeof BaseToast.createToastManager>['close']>) =>
+    getToastManager().close(...args),
+  update: (...args: Parameters<ReturnType<typeof BaseToast.createToastManager>['update']>) =>
+    getToastManager().update(...args),
+  promise: (...args: Parameters<ReturnType<typeof BaseToast.createToastManager>['promise']>) =>
+    getToastManager().promise(...args),
+};
 
 // Re-export useToastManager hook
 export const useToastManager = BaseToast.useToastManager;
 
+export interface ToastProviderProps
+  extends Omit<React.ComponentProps<typeof BaseToast.Provider>, 'toastManager'> {
+  /** Pass your own toastManager, or leave undefined to use the global one */
+  toastManager?: ReturnType<typeof BaseToast.createToastManager>;
+}
+
 export function ToastProvider({
   children,
+  toastManager: customManager,
   ...props
-}: React.ComponentProps<typeof BaseToast.Provider>) {
+}: ToastProviderProps) {
+  const manager = React.useMemo(
+    () => customManager ?? getToastManager(),
+    [customManager]
+  );
+
   return (
-    <BaseToast.Provider toastManager={toastManager} {...props}>
+    <BaseToast.Provider toastManager={manager} {...props}>
       {children}
-      <ToastPortal />
+      <ToastViewportWithPortal />
     </BaseToast.Provider>
+  );
+}
+
+/** Internal: renders portal + viewport + default renderer inside Provider */
+function ToastViewportWithPortal() {
+  return (
+    <BaseToast.Portal>
+      <ToastViewport>
+        <DefaultToastRenderer />
+      </ToastViewport>
+    </BaseToast.Portal>
   );
 }
 

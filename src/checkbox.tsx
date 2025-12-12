@@ -1,5 +1,5 @@
-import { Checkbox as BaseCheckbox } from '@base-ui-components/react/checkbox';
-import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui-components/react/checkbox-group';
+import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox';
+import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui/react/checkbox-group';
 import { Check, Minus } from '@phosphor-icons/react';
 import { cn } from './utils';
 

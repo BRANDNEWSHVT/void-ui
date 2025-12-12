@@ -1,4 +1,4 @@
-import { Fieldset as BaseFieldset } from '@base-ui-components/react/fieldset';
+import { Fieldset as BaseFieldset } from '@base-ui/react/fieldset';
 import { cn } from './utils';
 
 export function Fieldset({

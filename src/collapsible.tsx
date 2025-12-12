@@ -1,4 +1,4 @@
-import { Collapsible as BaseCollapsible } from '@base-ui-components/react/collapsible';
+import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible';
 import { CaretDown } from '@phosphor-icons/react';
 import { cn } from './utils';
 

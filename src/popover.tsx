@@ -1,4 +1,4 @@
-import { Popover as BasePopover } from '@base-ui-components/react/popover';
+import { Popover as BasePopover } from '@base-ui/react/popover';
 import { X } from '@phosphor-icons/react';
 import { cn } from './utils';
 
